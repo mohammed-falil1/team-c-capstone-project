@@ -1,13 +1,13 @@
-package com.collabera.capstone_project;
+package com.collabera.account_management_system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CapstoneProjectApplication {
+public class AccountManagementSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CapstoneProjectApplication.class, args);
+		SpringApplication.run(AccountManagementSystemApplication.class, args);
 	}
 
 }

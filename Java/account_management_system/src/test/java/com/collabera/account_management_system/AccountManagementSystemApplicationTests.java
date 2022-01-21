@@ -1,10 +1,10 @@
-package com.collabera.capstone_project;
+package com.collabera.account_management_system;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CapstoneProjectApplicationTests {
+class AccountManagementSystemApplicationTests {
 
 	@Test
 	void contextLoads() {
