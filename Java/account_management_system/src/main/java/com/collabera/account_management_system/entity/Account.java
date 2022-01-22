@@ -49,9 +49,9 @@ public class Account {
 	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
 	private Set<PayeeTable> payee = new HashSet<>();
 	
-	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
-	private Set<BillerRegistered> billerRegistered = new HashSet<>();
-	
+//	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
+//	private Set<BillerProvider> billerProvider = new HashSet<>();
+//	
 
 	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
 	private Set<TransactionTable> transaction = new HashSet<>();
