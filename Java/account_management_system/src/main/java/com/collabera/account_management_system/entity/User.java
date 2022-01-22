@@ -63,7 +63,7 @@ public class User {
 	@Column(name = "initial_balance")
 	private int initialBalance;
 	
-	@Column(name = "time_stamp")
+	@Column(name = "timestamp")
 	private long timestamp;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)

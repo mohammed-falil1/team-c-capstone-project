@@ -14,29 +14,36 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
+@Table(name = "transaction_table")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "account_approval")
-public class AccountApproval {
+
+public class TransactionTable {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="account_number_fk",nullable = false)
+	private Account accountId;
 	
-	@Column(name = "status")
-	private String status;
+	@Column(name="transaction_type")
+	private String transactionType;
 	
-	@Column(name = "timestamp")
+	@Column(name="amount")
+	private int amount;
+	
+	@Column(name="transaction_id", unique = true)
+	private int transactionId;
+	
+	@Column(name="timestamp")
 	private long timestamp;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user")
-	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "admin")
-	private AdminAuthentication admin;
+	@Column(name="remarks")
+	private String remarks;
 
 }
