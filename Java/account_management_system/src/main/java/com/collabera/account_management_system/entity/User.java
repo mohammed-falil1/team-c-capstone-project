@@ -7,9 +7,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+
+import com.collabera.account_management_system.entity.AadharDb;
+import com.collabera.account_management_system.entity.PanCardDb;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -49,22 +56,22 @@ public class User {
 	private String email;
 	
 	@Column(name = "mobile_number" )
-	private int mobileNumber;
+	private long mobileNumber;
 	
 	@Column(name ="pan_card")
-	private int panCard;
+	private String panCard;
 	
 	@Column(name ="aadhar")
-	private int aadhar;
+	private long aadhar;
 	
 	@Column(name = "upload_address")
 	private String uploadAddress;
 	
 	@Column(name = "initial_balance")
-	private int initialBalance;
+	private long initialBalance;
 	
 	@Column(name = "timestamp")
-	private long timestamp;
+	private String timestamp;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<Account>  account = new HashSet<Account>();
@@ -73,6 +80,12 @@ public class User {
 	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
 	private Set<AccountApproval> accountApproval = new HashSet<AccountApproval>();
 	
-		
+	@Column(name ="pan_card_id")
+	private PanCardDb panCardDb;
+	
+	@Column(name ="aadhar_id")
+	private AadharDb aadharDb;
+
+	
 
 }

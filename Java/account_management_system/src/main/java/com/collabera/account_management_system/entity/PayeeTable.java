@@ -27,8 +27,7 @@ public class PayeeTable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="account_number_fk",nullable = false)
+	@Column(name ="account_id")
 	private Account accountId;
 
 	@Column(name="short_name")

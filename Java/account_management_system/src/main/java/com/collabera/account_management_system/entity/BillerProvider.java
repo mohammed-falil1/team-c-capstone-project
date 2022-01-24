@@ -37,5 +37,5 @@ public class BillerProvider {
 	
 	@ManyToOne(fetch = FetchType.LAZY  )
 	@JoinColumn(name = "account_id_fk",nullable = false)
-	private Account account;
+	private Account accountId;
 }
