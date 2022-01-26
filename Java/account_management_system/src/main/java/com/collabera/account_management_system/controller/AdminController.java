@@ -18,11 +18,20 @@ public class AdminController {
 	AdminService adminService;
 
 	@GetMapping("/users/{from}/{to}")
-	public ResponseEntity<List<AccountApproval>> getAllUsers(@PathVariable String from, @PathVariable String to) {
-		
-		List<AccountApproval> accountApprovals = adminService.getApprovals(from,to);
+	public ResponseEntity<List<AccountApproval>> getUsersFromDate(@PathVariable String from, @PathVariable String to) {
+
+		List<AccountApproval> accountApprovals = adminService.getApprovals(from, to);
 
 		return ResponseEntity.ok(accountApprovals);
+
+	}
+
+	@GetMapping("/account-approval/{userId}")
+	public ResponseEntity<Boolean> accounApproval(@PathVariable int userId) {
+
+		boolean response = adminService.accountAporval(userId);
+
+		return ResponseEntity.ok(response);
 
 	}
 

@@ -6,7 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 
 import javax.persistence.OneToOne;
@@ -47,7 +47,8 @@ public class AadharDb {
 	@Column(name = "aadharCard")
 	private byte[] aadharCard;
 
-	@OneToOne(mappedBy = "aadharDb", fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id_fks")
 	private User user;
 
 }

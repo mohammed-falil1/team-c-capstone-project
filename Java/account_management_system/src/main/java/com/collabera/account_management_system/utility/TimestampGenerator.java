@@ -1,16 +1,17 @@
 package com.collabera.account_management_system.utility;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
-public  class TimestampGenerator {
-	
-	static Timestamp timestamp;
-	
-	public static  String getTimeStamp() {
+public class TimestampGenerator {
+
+	static LocalDate localDate;
+
+	public static LocalDate getTimeStamp() {
 		
-		timestamp=new Timestamp(System.currentTimeMillis());
-		System.out.println("timeStamp = "+timestamp);
-		return timestamp.toString();
+		localDate=LocalDate.now(); 
+		return localDate;
+			
+		
 	}
 
 }

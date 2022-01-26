@@ -44,6 +44,10 @@ public class PanCardDb {
 	@Lob
 	@Column(name = "pancard")
 	private byte[] panCard;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id_fk")
+	private User user;
 
 
 	

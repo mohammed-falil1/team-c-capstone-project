@@ -14,10 +14,10 @@ public class EmailSenderService {
 	@Autowired
 	JavaMailSender javaMailSender;
 
-	public void sendEmail(String fromEmail, String toEmail, String subject, String body) {
+	public void sendEmail(String from, String to, String subject, String body) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom(fromEmail);
-		message.setTo(toEmail);
+		message.setFrom(from);
+		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(body);
 
@@ -26,5 +26,23 @@ public class EmailSenderService {
 		System.out.println("Mail sent succesfully....");
 
 	}
+	
+	
+//	public void sendEmailAccountOpened(String from, String to, String subject, String body) {
+//		SimpleMailMessage message = new SimpleMailMessage();
+//		message.setFrom(from);
+//		message.setTo(to);
+//		message.setSubject(subject);
+//		message.setText(body);
+//
+//		javaMailSender.send(message);
+//
+//		System.out.println("Mail sent succesfully....");
+//
+//	}
+//	
+	
+	
+	
 
 }

@@ -27,7 +27,8 @@ public class PayeeTable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name ="account_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="account_id_fk")
 	private Account accountId;
 
 	@Column(name="short_name")
@@ -38,5 +39,7 @@ public class PayeeTable {
 	
 	@Column(name="timestamp")
 	private long timestamp;
+	
+	
 
 }
