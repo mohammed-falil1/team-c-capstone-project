@@ -1,9 +1,13 @@
-import { React, useEffect, useState } from "react";
+import { React } from "react";
 import axios from "axios";
 import "../CSS/SignUp.css";
 
 function SignUp() {
   const baseURL = "http://localhost:9000/visit/new-account";
+
+  // const handleChange = (e) => {
+  //   console.log(e);
+  // };
 
   const calculateAge = (dob) => {
     var today = new Date();
@@ -16,22 +20,80 @@ function SignUp() {
     return age;
   };
 
-  const formSubmit = () => {
+  const formSubmit = (event) => {
+    event.preventDefault();
+
+    var title = document.getElementById("mySelect").value;
+    var fullName = document.getElementById("fullName").value;
+    var dob = document.getElementById("dob").value;
+    var email = document.getElementById("email").value;
+    var mobileNumber = document.getElementById("mobileNumber").value;
+    var panCard = document.getElementById("panCard").value;
+    var aadhar = document.getElementById("aadhar").value;
+    var initialBalance = document.getElementById("initialBalance").value;
+    console.log(
+      "printing values :" +
+        title +
+        fullName +
+        dob +
+        email +
+        mobileNumber +
+        panCard +
+        aadhar +
+        initialBalance
+    );
+
+    // console.log("inside form submit")
+    // axios
+    //   .post(baseURL, {
+    //     title: "MR",
+    //     fullName: "Mohammed Falil",
+    //     dob: "17/07/1999",
+    //     email: "z-gonim0@developermail.com",
+    //     mobileNumber: 8680980924,
+    //     panCard: "ABCD43526",
+    //     aadhar: 1234567890,
+    //     uploadAddress: "somethingAddress",
+    //     initialBalance: 1000,
+    //   })
+    //   .then(() => {
+    //     alert("Biller Registered Succesfully. go to Biller Provider Page...");
+    //   });
+
+    console.log("inside form submit");
     axios
       .post(baseURL, {
-        title: "MR",
-        fullName: "Mohammed Falil",
-        dob: "17/07/1999",
-        email: "z-gonim0@developermail.com",
-        mobileNumber: 8680980924,
-        panCard: "ABCD43526",
-        aadhar: 1234567890,
+        title: title,
+        fullName: fullName,
+        dob: dob,
+        email: email,
+        mobileNumber: mobileNumber,
+        panCard: panCard,
+        aadhar: aadhar,
         uploadAddress: "somethingAddress",
-        initialBalance: 1000,
+        initialBalance: initialBalance,
       })
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
+        alert("Biller Registered Succesfully. go to Biller Provider Page...");
       });
+
+    // fetch(baseURL, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     title: title,
+    //     fullName: fullName,
+    //     dob: dob,
+    //     email: email,
+    //     mobileNumber: mobileNumber,
+    //     panCard: panCard,
+    //     aadhar: aadhar,
+    //     // uploadAddress: "somethingAddress",
+    //     initialBalance: initialBalance,
+    //   }),
+    // }).then(() => {
+    //   alert("Biller Registered Succesfully. go to Biller Provider Page...");
+    // });
   };
 
   return (
@@ -43,72 +105,22 @@ function SignUp() {
               <div class="form-items">
                 <h3>Register Today</h3>
                 <p>Fill in the data below.</p>
-                <form
-                  class="requires-validation"
-                  novalidate
-                  onSubmit={formSubmit()}
-                >
+                <form class="requires-validation" onSubmit={formSubmit}>
                   <div class="col-md-12 mt-3">
                     <label
-                      class="mb-3 mr-1"
-                      for="gender"
-                      style={{ marginRight: "10px" }}
+                      for="pan-card"
+                      style={{ padding: "9px 0px 0px 9px" }}
                     >
-                      Title:{" "}
+                      Title :
                     </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="gender"
-                      id="male"
-                      autocomplete="off"
-                      required
-                    />
-                    <label
-                      class="btn btn-sm btn-outline-secondary"
-                      for="male"
-                      style={{ marginRight: "10px" }}
+                    <select
+                      // value={this.state.selectValue}
+                      id="mySelect"
                     >
-                      Mr
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="gender"
-                      id="female"
-                      autocomplete="off"
-                      required
-                    />
-                    <label
-                      class="btn btn-sm btn-outline-secondary"
-                      for="female"
-                      style={{ marginRight: "10px" }}
-                    >
-                      Ms
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="gender"
-                      id="secret"
-                      autocomplete="off"
-                      required
-                    />
-                    <label
-                      class="btn btn-sm btn-outline-secondary"
-                      for="secret"
-                    >
-                      Ms
-                    </label>
-                    <div class="valid-feedback mv-up">
-                      You selected a gender!
-                    </div>
-                    <div class="invalid-feedback mv-up">
-                      Please select a gender!
-                    </div>
+                      <option value="Mr">Mr</option>
+                      <option value="Ms">Ms</option>
+                      <option value="Mrs">Mrs</option>
+                    </select>
                   </div>
 
                   <div class="col-md-12">
@@ -121,8 +133,10 @@ function SignUp() {
                     <input
                       class="form-control"
                       type="text"
-                      name="name"
+                      name="fullName"
+                      id="fullName"
                       placeholder="Full Name"
+                      defaultValue=""
                       required
                     />
                   </div>
@@ -137,7 +151,9 @@ function SignUp() {
                     <input
                       class="form-control"
                       type="date"
-                      name="date"
+                      name="dob"
+                      id="dob"
+                      defaultValue=""
                       required
                     />
                   </div>
@@ -153,7 +169,9 @@ function SignUp() {
                       class="form-control"
                       type="email"
                       name="email"
+                      id="email"
                       placeholder="E-mail Address"
+                      defaultValue=""
                       required
                     />
                   </div>
@@ -167,8 +185,10 @@ function SignUp() {
                     <input
                       class="form-control"
                       type="number"
-                      name="number"
+                      name="mobileNumber"
                       placeholder="Mobile Number"
+                      defaultValue=""
+                      id="mobileNumber"
                       required
                     />
                   </div>
@@ -182,8 +202,10 @@ function SignUp() {
                     <input
                       class="form-control"
                       type="text"
-                      name="text"
+                      name="panCard"
                       placeholder="Pan Card Number"
+                      defaultValue=""
+                      id="panCard"
                       required
                     />
                   </div>
@@ -197,11 +219,35 @@ function SignUp() {
                     <input
                       class="form-control"
                       type="text"
-                      name="text"
+                      name="aadhar"
+                      id="aadhar"
                       placeholder="Aadhar Card Number"
+                      defaultValue=""
                       required
                     />
                   </div>
+
+                  <div class="col-md-12">
+                    <label
+                      for="initialBalance"
+                      style={{ padding: "9px 0px 0px 9px" }}
+                    >
+                      Initial Balance
+                    </label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="initialBalance"
+                      required
+                      id="initialBalance"
+                      defaultValue=""
+                    />
+
+                    <div class="invalid-feedback">
+                      Example invalid form file feedback
+                    </div>
+                  </div>
+
                   <div class="col-md-12">
                     <label for="aadhar" style={{ padding: "9px 0px 0px 9px" }}>
                       Aadhar.pdf
@@ -211,7 +257,8 @@ function SignUp() {
                       class="form-control"
                       name="aadhar-file"
                       required
-                      id="aadhar"
+                      id="aadhar-file"
+                      defaultValue=""
                     />
 
                     <div class="invalid-feedback">
@@ -232,6 +279,7 @@ function SignUp() {
                       name="pan-card-file"
                       required
                       id="pan-card"
+                      defaultValue=""
                     />
 
                     <div class="invalid-feedback">
@@ -248,6 +296,7 @@ function SignUp() {
                       type="checkbox"
                       value=""
                       id="invalidCheck"
+                      defaultValue=""
                       required
                     />
                     <label class="form-check-label">

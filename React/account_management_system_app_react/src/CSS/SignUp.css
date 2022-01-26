@@ -11,8 +11,9 @@ body {
 
 html,
 body {
-  height: 100%;
-  overflow-y: scroll;
+  height: auto;
+  width: auto;
+
 }
 
 .form-holder {
