@@ -1,5 +1,7 @@
 package com.collabera.account_management_system.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,14 +30,13 @@ public class BillerProvider {
 	@Column(name = "consumer_number")
 	private long consumerNumber;
 	
-	@Column(name ="timestamp")
-	private long timestamp;
+	@Column(name ="timestamp", nullable = true)
+	private LocalDate timestamp;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="bill_reg_id",nullable = false)
-	private BillerRegister billerRegister;
+	@Column(name = "account_id")
+	private long accountId;
 	
-	@ManyToOne(fetch = FetchType.LAZY  )
-	@JoinColumn(name = "account_id_fk",nullable = false)
-	private Account accountId;
+	@Column(name = "biller_name ")
+	private String billerName ;
 }
+

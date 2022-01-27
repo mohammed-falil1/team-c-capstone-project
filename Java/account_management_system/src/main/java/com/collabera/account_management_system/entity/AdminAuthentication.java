@@ -30,8 +30,8 @@ public class AdminAuthentication {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToMany(mappedBy = "admin",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private Set<AccountApproval> accountApprovals= new HashSet<>();
+//	@OneToMany(mappedBy = "admin",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private Set<AccountApproval> accountApprovals= new HashSet<>();
 	
 	
 	

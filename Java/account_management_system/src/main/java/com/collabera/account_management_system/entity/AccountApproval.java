@@ -41,16 +41,13 @@ public class AccountApproval {
 	@Column(name = "user_id")
 	private int userId;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "user_id_fk")
-//	private User user;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id_fk")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "admin_id_fk")
-	private AdminAuthentication admin;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "admin_id_fk")
+//	private AdminAuthentication admin;
 
 }

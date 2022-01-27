@@ -19,7 +19,7 @@ public class AccountService {
 
 	public Account addItToAccountTable(User user) {
 		Account account = new Account();
-		account.setAccountNumber(generators.getAccountNumber());
+		account.setAccountNumber(1);
 		account.setBalance(user.getInitialBalance());
 		account.setUserId(user.getUserId());
 		account.setTimestamp(Generators.getTimeStamp());

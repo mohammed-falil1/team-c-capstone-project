@@ -46,5 +46,8 @@ public class TransactionTable {
 	
 	@Column(name="remarks")
 	private String remarks;
+	
+	@Column(name = "account_number")
+	private long accountNumber;
 
 }

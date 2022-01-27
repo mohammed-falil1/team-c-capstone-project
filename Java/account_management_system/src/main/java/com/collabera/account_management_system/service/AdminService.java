@@ -22,7 +22,6 @@ import com.collabera.account_management_system.repo.TransactionRepo;
 import com.collabera.account_management_system.repo.UserRepo;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 import com.collabera.account_management_system.utility.Generators;
-import com.collabera.account_management_system.utility.TimestampGenerator;
 
 import net.bytebuddy.description.type.TypeDescription.Generic.Visitor;
 
@@ -69,14 +68,14 @@ public class AdminService {
 		return adminRepo.findByTimestampBetween(localDateFrom, localDateTo);
 	}
 
-	public boolean accountAporval(int userId) {
+	public boolean accountApporval(int userId) {
 		User user = userRepo.findUsersByUserId(userId);
 		if (user != null) {
 			System.out.print("inside if cases and userId = " + userId);
 			accountApprovalService.updateStatus(userId);
 			userRepo.save(user);
 			account = accountService.addItToAccountTable(user);
-			transactionsService.addItToTransactionTable(account);
+			transactionsService.addItToTransactionTable(account,"credit");
 
 			// send email to the user on account opening
 			sendEmailAfterAccountApproval(user);
@@ -87,10 +86,11 @@ public class AdminService {
 
 	public void sendEmailAfterAccountApproval(User user) {
 		String subject = "Account Opened Sucessfully";
-		String body = "Body of the text";
+		String body = "Account Opened Sucessfully. You can login with your email.";
 		emailSenderService.sendEmail(ApplicationConstants.SENDER_EMAIL_ID, user.getEmail(), subject, body);
 
 	}
+
 
 //	public boolean checkUser(int userId) {
 //

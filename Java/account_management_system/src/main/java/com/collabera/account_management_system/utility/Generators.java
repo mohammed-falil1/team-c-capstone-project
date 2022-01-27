@@ -42,7 +42,7 @@ public class Generators {
 
 	}
 
-	public long getAccountNumber() {
+	public long getNewAccountNumber() {
 
 		AccountNumber accountNumberFromDB = accountNumberRepo.findAccount_numberById(1);
 		if (accountNumberFromDB == null) {
@@ -80,7 +80,7 @@ public class Generators {
 
 	public int getUserId() {
 
-		 UserId userIdFromDb = userIdRepo.findUser_idById(1);
+		UserId userIdFromDb = userIdRepo.findUser_idById(1);
 		if (userIdFromDb == null) {
 			System.out.println("user id is null");
 			userId.setUserId(101);

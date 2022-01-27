@@ -19,12 +19,12 @@ public class TransactionsService {
 	TransactionRepo transactionRepo;
 
 
-	public void addItToTransactionTable(Account account) {
+	public void addItToTransactionTable(Account account,String type) {
 		TransactionTable transactionTable = new TransactionTable();
 		transactionTable.setAmount(account.getAccountNumber());
 		transactionTable.setRemarks("initial");
 		transactionTable.setTimestamp(Generators.getTimeStamp());
-		transactionTable.setTransactionType("credit");
+		transactionTable.setTransactionType(type);
 		transactionRepo.save(transactionTable);
 
 	}

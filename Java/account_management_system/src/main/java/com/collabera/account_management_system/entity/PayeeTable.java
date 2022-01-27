@@ -1,5 +1,7 @@
 package com.collabera.account_management_system.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +40,7 @@ public class PayeeTable {
 	private int payeeAccountNumber;
 	
 	@Column(name="timestamp")
-	private long timestamp;
+	private LocalDate timestamp;
 	
 	
 
