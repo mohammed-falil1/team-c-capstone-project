@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +39,8 @@ public class AdminService {
 	@Autowired
 	UserRepo userRepo;
 
-	@Autowired
-	Account account;
+//	@Autowired
+//	Account account;
 
 	@Autowired
 	VistorService vistorService;
@@ -70,6 +69,7 @@ public class AdminService {
 
 	public boolean accountApporval(int userId) {
 		User user = userRepo.findUsersByUserId(userId);
+		Account account = new Account();
 		if (user != null) {
 			System.out.print("inside if cases and userId = " + userId);
 			accountApprovalService.updateStatus(userId);

@@ -45,6 +45,7 @@ public class Generators {
 	public long getNewAccountNumber() {
 
 		AccountNumber accountNumberFromDB = accountNumberRepo.findAccount_numberById(1);
+
 		if (accountNumberFromDB == null) {
 			System.out.println("accountNumber id is null");
 			accountNumber.setAccountNumber(Long.valueOf(100001));
