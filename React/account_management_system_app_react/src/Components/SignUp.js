@@ -3,11 +3,7 @@ import axios from "axios";
 import "../CSS/SignUp.css";
 
 function SignUp() {
-  const baseURL = "http://localhost:9000/visit/new-account";
-
-  // const handleChange = (e) => {
-  //   console.log(e);
-  // };
+  const baseURL = "http://localhost:8080/visit/new-account";
 
   const calculateAge = (dob) => {
     var today = new Date();
@@ -43,23 +39,6 @@ function SignUp() {
         initialBalance
     );
 
-    // console.log("inside form submit")
-    // axios
-    //   .post(baseURL, {
-    //     title: "MR",
-    //     fullName: "Mohammed Falil",
-    //     dob: "17/07/1999",
-    //     email: "z-gonim0@developermail.com",
-    //     mobileNumber: 8680980924,
-    //     panCard: "ABCD43526",
-    //     aadhar: 1234567890,
-    //     uploadAddress: "somethingAddress",
-    //     initialBalance: 1000,
-    //   })
-    //   .then(() => {
-    //     alert("Biller Registered Succesfully. go to Biller Provider Page...");
-    //   });
-
     console.log("inside form submit");
     axios
       .post(baseURL, {
@@ -74,26 +53,8 @@ function SignUp() {
         initialBalance: initialBalance,
       })
       .then(() => {
-        alert("Biller Registered Succesfully. go to Biller Provider Page...");
+        alert("User Successfully registered ");
       });
-
-    // fetch(baseURL, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     title: title,
-    //     fullName: fullName,
-    //     dob: dob,
-    //     email: email,
-    //     mobileNumber: mobileNumber,
-    //     panCard: panCard,
-    //     aadhar: aadhar,
-    //     // uploadAddress: "somethingAddress",
-    //     initialBalance: initialBalance,
-    //   }),
-    // }).then(() => {
-    //   alert("Biller Registered Succesfully. go to Biller Provider Page...");
-    // });
   };
 
   return (
