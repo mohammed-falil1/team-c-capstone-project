@@ -42,12 +42,12 @@ const NavBar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/BillerProvider">
-                  Biller Provider
+                <a className="nav-link" href="/BillerPay">
+                  Biller Pay
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/BillerProvider">
+                <a className="nav-link" href="/BillerStatement">
                   Biller Statement
                 </a>
               </li>

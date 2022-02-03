@@ -1,6 +1,6 @@
 import { React } from "react";
 import axios from "axios";
-import "../CSS/SignUp.css";
+// import "../CSS/SignUp.css";
 
 function SignUp() {
   const baseURL = "http://localhost:8080/visit/new-account";
@@ -31,13 +31,19 @@ function SignUp() {
       "printing values :" +
         title +
         fullName +
+        "dob =   " +
         dob +
+        "  " +
         email +
         mobileNumber +
         panCard +
         aadhar +
         initialBalance
     );
+    console.log("typeOf mobile number " + typeof mobileNumber);
+    console.log("typeOf dob " + typeof dob);
+    console.log("typeOf panCard " + typeof panCard);
+    console.log("typeOf aadhar " + typeof aadhar);
 
     console.log("inside form submit");
     axios

@@ -1,102 +1,100 @@
-import React, { useState } from "react";
-import { omit } from "lodash";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
 
-const useForm = () => {
-  //Form values
-  const [values, setValues] = useState({});
-  //Errors
+function useForm({ submitForm, Validate }) {
+  const [values, setValues] = useState({
+    title: "Mr",
+    fullName: "",
+    dob: "",
+    email: "",
+    mobileNumber: "",
+    panCard: "",
+    aadhar: "",
+    initialBalance: "",
+  });
+  const baseURL = "http://localhost:8080/visit/new-account";
+
+  const [aadharFile, setAadharFile] = useState(null);
+  const [panCardFile, setPanCardFile] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
+
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const validate = (event, name, value) => {
-    //A function to validate each input values
-
-    switch (name) {
-      case "username":
-        if (value.length <= 4) {
-          // we will set the error state
-
-          setErrors({
-            ...errors,
-            username: "Username atleast have 5 letters",
-          });
-        } else {
-          // set the error state empty or remove the error for username input
-
-          //omit function removes/omits the value from given object and returns a new object
-          let newObj = omit(errors, "username");
-          setErrors(newObj);
-        }
-        break;
-
-      case "email":
-        if (
-          !new RegExp(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          ).test(value)
-        ) {
-          setErrors({
-            ...errors,
-            email: "Enter a valid email address",
-          });
-        } else {
-          let newObj = omit(errors, "email");
-          setErrors(newObj);
-        }
-        break;
-
-      case "password":
-        if (
-          !new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/).test(value)
-        ) {
-          setErrors({
-            ...errors,
-            password:
-              "Password should contains atleast 8 charaters and containing uppercase,lowercase and numbers",
-          });
-        } else {
-          let newObj = omit(errors, "password");
-          setErrors(newObj);
-        }
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  //A method to handle form inputs
-  const handleChange = (event) => {
-    //To stop default events
-    event.persist();
-
-    let name = event.target.name;
-    let val = event.target.value;
-
-    validate(event, name, val);
-    //Let's set these values in state
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: val,
+      [name]: value,
     });
+    console.log("json  " + JSON.stringify(value));
   };
 
-  const handleSubmit = (event) => {
-    if (event) event.preventDefault();
-
-    if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
-      callback();
+  const handleCheckBox = (e) => {
+    if (e.target.checked) {
+      setIsChecked(true);
     } else {
-      alert("There is an Error!");
+      setIsChecked(false);
     }
   };
 
+  const handleFileSelected = (e) => {
+    if (e.target.name === "aadhar-file") {
+      setAadharFile(e.target.files[0]);
+    } else {
+      setPanCardFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("after clicking register ", JSON.stringify(values));
+    setErrors(Validate(values, aadharFile, panCardFile, isChecked));
+    setIsSubmitting(true);
+  };
+  useEffect(() => {
+    console.log("inside useEffect");
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      console.log(JSON.stringify(Object.keys(errors)));
+      // let formData = new FormData();
+      let sendBackEnd = {
+        title: values.title,
+        fullName: values.fullName,
+        dob: values.dob,
+        email: values.email,
+        mobileNumber: values.mobileNumber,
+        panCard: values.panCard,
+        aadhar: values.aadhar,
+        uploadAddress: "somethingAddress",
+        initialBalance: values.initialBalance,
+        panCardFile: panCardFile,
+        aadharFile: aadharFile,
+      };
+
+      // formData.append("user",sendBackEnd);
+      // // formData.append("aadhar",aadharFile);
+      // // formData.append("pancard",panCardFile);
+      const headers = {
+        // 'Authorization': 'Bearer my-token',
+        "Content-Type": "application/x-www-form-urlencoded",
+      };
+
+      axios
+        .post(baseURL, sendBackEnd, panCardFile, aadharFile, headers)
+        .then(() => {
+          alert("User Successfully registered ");
+        });
+      submitForm();
+    }
+  }, [errors]);
   return {
-    values,
-    errors,
     handleChange,
     handleSubmit,
+    values,
+    errors,
+    handleFileSelected,
+    handleCheckBox,
   };
-};
+}
 
 export default useForm;
