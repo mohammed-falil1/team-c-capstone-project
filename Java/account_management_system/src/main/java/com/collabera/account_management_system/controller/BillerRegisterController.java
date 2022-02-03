@@ -42,16 +42,12 @@ public class BillerRegisterController{
 		return ResponseEntity.ok(billerregisterEntity);
 	}
 	
-//	@PostMapping("/billerregister")  	   
-//    public ResponseEntity<String> createNewRegister(@RequestBody BillerRegister billerRegister) {
-//    	String strCreateStatus="Biller Registered Succesfully";
-//    	registerService.createNewRegistry(billerRegister);
-//		return ResponseEntity.status(HttpStatus.CREATED).body(strCreateStatus);
-//    }
-	
-	
-	
-	
-	
+	@PostMapping("/add-billerregister")
+	public ResponseEntity<BillerRegister> createbillerRegister (@RequestBody BillerRegister billerRegister){
+
+		billerregisterService.createbillerRegister(billerRegister);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+		
+	}
 	
 }

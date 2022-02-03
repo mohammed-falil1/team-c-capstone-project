@@ -6,4 +6,8 @@ import com.collabera.account_management_system.entity.Account;
 
 public interface AccountRepo extends JpaRepository<Account, Integer> {
 
+	Account findAccountsById(int id);
+
+	Account findAccountsByAccountNumber(long accountNumber);
+
 }

@@ -70,6 +70,7 @@ public class Generators {
 		} else {
 			System.out.println("applicationId is not not ");
 			System.out.println(applicationIdFromDb.getApplicationId());
+			
 			applicationId.setApplicationId(applicationIdFromDb.getApplicationId());
 		}
 		int app_id = applicationId.getApplicationId();

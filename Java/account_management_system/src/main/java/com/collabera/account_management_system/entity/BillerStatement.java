@@ -1,5 +1,6 @@
-
 package com.collabera.account_management_system.entity;
+
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,23 +9,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
-@Table(name = "biller_register")
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-public class BillerRegister {
-
+@NoArgsConstructor
+@Table(name = "biller_statement")
+public class BillerStatement {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "biller_name")
-	private String billerName;
 	
+	@Column(name = "bill_number")
+	private long billNo;
+	
+	@Column(name = "account_number")
+	private long accountNumber;
+	
+	@Column(name ="timestamp", nullable = true)
+	private LocalDate timestamp;
+	
+	
+	@Column(name = "amount")
+	private long amount;
+	
+	
+	@Column(name = "biller_service")
+	private String billerService;
+	
+	
+
 }

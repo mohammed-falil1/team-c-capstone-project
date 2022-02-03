@@ -28,5 +28,11 @@ public class BillerRegisterService {
 		return billerregisterRepository.findBiller_registerByBillerName(billername);
 	}
 
+
+	public void createbillerRegister(BillerRegister billerRegister) {
+		// TODO Auto-generated method stub
+		billerregisterRepository.save(billerRegister);
+	}
+
 	
 }

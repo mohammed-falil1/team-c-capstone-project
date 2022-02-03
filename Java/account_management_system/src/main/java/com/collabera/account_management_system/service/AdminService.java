@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.collabera.account_management_system.Vo.DepositOrWithdraw;
 import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.AccountApproval;
 import com.collabera.account_management_system.entity.AccountNumber;
@@ -69,13 +70,20 @@ public class AdminService {
 
 	public boolean accountApporval(int userId) {
 		User user = userRepo.findUsersByUserId(userId);
+		DepositOrWithdraw depositOrWithdraw = new DepositOrWithdraw();
 		Account account = new Account();
+
 		if (user != null) {
 			System.out.print("inside if cases and userId = " + userId);
 			accountApprovalService.updateStatus(userId);
 			userRepo.save(user);
+			System.out.println("User initial Balace "+user.getInitialBalance());
+			depositOrWithdraw.setAmount(user.getInitialBalance());
+			System.out.println("user initial balance ");
+			depositOrWithdraw.setRemarks("Initial");
+			depositOrWithdraw.setType(ApplicationConstants.CREDIT);
 			account = accountService.addItToAccountTable(user);
-			transactionsService.addItToTransactionTable(account,"credit");
+			transactionsService.addItToTransactionTable(account,depositOrWithdraw);
 
 			// send email to the user on account opening
 			sendEmailAfterAccountApproval(user);

@@ -50,12 +50,12 @@ public class Account {
 	@JoinColumn(name = "user_id_fk")
 	private User user;
 
-	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
-	private Set<PayeeTable> payee = new HashSet<>();
-
-	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
-	private Set<BillerProvider> billerProvider = new HashSet<>();
+//	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
+//	private Set<PayeeTable> payee = new HashSet<>();
 //
+//	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
+//	private Set<BillerProvider> billerProvider = new HashSet<>();
+////
 //	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
 //	private Set<TransactionTable> transaction = new HashSet<>();
 

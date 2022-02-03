@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,11 +43,19 @@ public class VisitorController {
 
 	@Autowired
 	Optional<AadharDb> aadhar;
-	
+
 	@Autowired
 	Optional<PanCardDb> panCard;
 
-	@PostMapping("/new-account")
+//	@PostMapping("/new-account")
+//	public ResponseEntity<String> createAccount(@RequestBody User user) {
+//
+//		String response = vistorService.createAccount(user);
+//		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+//	}
+
+//	@PostMapping(value="/new-account",consumes = { MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE })
+	@PostMapping(value="/new-account")
 	public ResponseEntity<String> createAccount(@RequestBody User user) {
 
 		String response = vistorService.createAccount(user);
@@ -71,7 +80,7 @@ public class VisitorController {
 				.contentType(MediaType.parseMediaType(aadhar.get().getAadharFileType()))
 				.body(new ByteArrayResource(aadhar.get().getAadharCard()));
 	}
-	
+
 	@PostMapping("/upload-pancard")
 	public ResponseEntity<ResponseFile> uploadPanCard(@RequestBody MultipartFile panCard) throws IOException {
 
@@ -80,7 +89,7 @@ public class VisitorController {
 		return ResponseEntity.ok(responseFile);
 
 	}
-	
+
 	@GetMapping("/download-pancard/{id}")
 	public ResponseEntity<Resource> downloadPanCard(@PathVariable String id) {
 		panCard = fileService.getPanCardFromDb(id);
@@ -90,5 +99,5 @@ public class VisitorController {
 				.contentType(MediaType.parseMediaType(panCard.get().getPanCardFileType()))
 				.body(new ByteArrayResource(panCard.get().getPanCard()));
 	}
-	
+
 }

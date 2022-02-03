@@ -7,7 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -56,11 +56,11 @@ public class User {
 	@Column(name = "mobile_number")
 	private long mobileNumber;
 
-	@Column(name = "pan_card")
-	private String panCard;
+	@Column(name = "pan_card_no")
+	private String panCardNumber;
 
-	@Column(name = "aadhar")
-	private long aadhar;
+	@Column(name = "aadhar_number")
+	private long aadharNumber;
 
 	@Column(name = "upload_address")
 	private String uploadAddress;
@@ -70,6 +70,15 @@ public class User {
 
 	@Column(name = "timestamp")
 	private LocalDate timestamp;
+	
+	@Lob
+	@Column(name = "aadhar_card_file")
+	private byte[] aadharCardFile;
+	
+	@Lob
+	@Column(name = "pancard_card_file")
+	private byte[] panCardFile;
+	
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Account> account = new HashSet<Account>();

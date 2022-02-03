@@ -11,11 +11,17 @@ import com.collabera.account_management_system.entity.BillerRegister;
 @Repository
 public interface BillerRegisterRepository extends JpaRepository<BillerRegister, Integer> {
 
-	List<BillerRegister> findAll(); 
-
 	BillerRegister findBiller_registerById(int id);
-	
+
 	BillerRegister findBiller_registerByBillerName(String billername);
+
+//	List<BillerRegister> findAll(); 
+//
+//	BillerRegister findBiller_registerById(int id);
+//	
+//	BillerRegister findBiller_registerByBillerName(String billername);
+
+	
 
 	
 
