@@ -47,6 +47,11 @@ public class BillerController {
 		String response = billerService.pay(billerPayment);
 		return ResponseEntity.ok(response);
 	}
+	
+	@GetMapping("/mybillers")
+	public ResponseEntity<List<BillerRegister>> myBillers(long accountNumber){
+		return null;
+	}
 
 	@GetMapping("/biller-stmt/{from}/{to}")
 	public ResponseEntity<List<BillerStatement>> getStatement(@PathVariable("from") String from,
