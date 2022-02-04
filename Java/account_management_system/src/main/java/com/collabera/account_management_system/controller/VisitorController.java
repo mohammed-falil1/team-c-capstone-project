@@ -9,23 +9,30 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 import com.collabera.account_management_system.entity.AadharDb;
 import com.collabera.account_management_system.entity.User;
 import com.collabera.account_management_system.service.FileService;
 import com.collabera.account_management_system.service.VistorService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.collabera.account_management_system.Vo.ResponseFile;
 import com.collabera.account_management_system.entity.PanCardDb;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @RestController
 @RequestMapping("/visit")
@@ -47,25 +54,18 @@ public class VisitorController {
 	@Autowired
 	Optional<PanCardDb> panCard;
 
-//	@PostMapping("/new-account")
-//	public ResponseEntity<String> createAccount(@RequestBody User user) {
-//
-//		String response = vistorService.createAccount(user);
-//		return ResponseEntity.status(HttpStatus.CREATED).body(response);
-//	}
-
-//	@PostMapping(value="/new-account",consumes = { MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE })
-	@PostMapping(value="/new-account")
+	@PostMapping("/new-account")
 	public ResponseEntity<String> createAccount(@RequestBody User user) {
 
 		String response = vistorService.createAccount(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
-	@PostMapping("/upload-aadhar")
-	public ResponseEntity<ResponseFile> uploadAadhar(@RequestBody MultipartFile aadhar) throws IOException {
 
-		responseFile = fileService.storeAadhar(aadhar);
+	@PostMapping(name = "/upload-aadhar")
+	public ResponseEntity<ResponseFile> uploadAadhar(@RequestParam("aadharFile") MultipartFile aadharFile) throws IOException {
+
+		responseFile = fileService.storeAadhar(aadharFile);
 
 		return ResponseEntity.ok(responseFile);
 
@@ -82,9 +82,9 @@ public class VisitorController {
 	}
 
 	@PostMapping("/upload-pancard")
-	public ResponseEntity<ResponseFile> uploadPanCard(@RequestBody MultipartFile panCard) throws IOException {
+	public ResponseEntity<ResponseFile> uploadPanCard(@RequestParam("panCardFile") MultipartFile panCardFile) throws IOException {
 
-		responseFile = fileService.storePanCard(panCard);
+		responseFile = fileService.storePanCard(panCardFile);
 
 		return ResponseEntity.ok(responseFile);
 

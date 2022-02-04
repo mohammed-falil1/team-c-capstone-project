@@ -4,15 +4,17 @@ import axios from "axios";
 function useForm({ submitForm, Validate }) {
   const [values, setValues] = useState({
     title: "Mr",
-    fullName: "",
-    dob: "",
-    email: "",
-    mobileNumber: "",
-    panCard: "",
-    aadhar: "",
-    initialBalance: "",
+    fullName: "Mohammed",
+    dob: "2000-07-13",
+    email: "mohammed_falil@outlook.com",
+    mobileNumber: "8680980924",
+    panCard: "111111",
+    aadhar: "111111",
+    initialBalance: "1000",
   });
-  const baseURL = "http://localhost:8080/visit/new-account";
+  const newAccountUrl = "http://localhost:8080/visit/new-account";
+  const aadharUploadUr = "http://localhost:8080/visit/upload-aadhar";
+  const panCardUploadUrl = "http://localhost:8080/visit/upload-pancard";
 
   const [aadharFile, setAadharFile] = useState(null);
   const [panCardFile, setPanCardFile] = useState(null);
@@ -56,8 +58,8 @@ function useForm({ submitForm, Validate }) {
     console.log("inside useEffect");
     if (Object.keys(errors).length === 0 && isSubmitting) {
       console.log(JSON.stringify(Object.keys(errors)));
-      // let formData = new FormData();
-      let sendBackEnd = {
+
+      let user = {
         title: values.title,
         fullName: values.fullName,
         dob: values.dob,
@@ -67,23 +69,67 @@ function useForm({ submitForm, Validate }) {
         aadhar: values.aadhar,
         uploadAddress: "somethingAddress",
         initialBalance: values.initialBalance,
-        panCardFile: panCardFile,
-        aadharFile: aadharFile,
       };
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": " multipart/form-data" },
+      //   body: user.aadharFile,
+      // };
 
-      // formData.append("user",sendBackEnd);
-      // // formData.append("aadhar",aadharFile);
-      // // formData.append("pancard",panCardFile);
+      // fetch(baseURL, requestOptions)
+      //   .then((response) => response.json())
+      //   .then((data) => console.log(data));
+
+      // formData.append("aadharFile", aadharFile);
+      // axios
+      //   .post(baseURL, {
+      //     formData,
+      //   })
+      //   .then(() => {
+      //     alert("User Successfully registered ");
+      //   });
+
+      //this is working
+      // let formData = new FormData();
+      // formData.append("aadharFile", aadharFile);
+      // const headers = {
+      //   // 'Authorization': 'Bearer my-token',
+      //   "Content-Type": " multipart/form-data",
+      // };
+      // axios.post(baseURL, formData, headers).then(() => {
+      //   alert("User Successfully registered ");
+      // });
+      //till this
+
+      // formData.append("user", user);
+      let formData;
+
       const headers = {
         // 'Authorization': 'Bearer my-token',
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "multipart/form-data",
       };
-
-      axios
-        .post(baseURL, sendBackEnd, panCardFile, aadharFile, headers)
-        .then(() => {
-          alert("User Successfully registered ");
+      axios.post(newAccountUrl, user).then(() => {
+        alert("User Successfully registered ");
+        formData = new FormData();
+        formData.append("aadharFile", aadharFile);
+        axios.post(aadharUploadUr, aadharFile, headers).then(() => {
+          formData = new FormData();
+          formData.append("panCardFile", panCardFile);
+          axios.post(panCardUploadUrl, panCardFile, headers);
         });
+      });
+
+      console.log(formData);
+      console.log(JSON.stringify(formData));
+
+      // axios({
+      //   method: "post",
+      //   url: baseURL,
+      //   body:
+      //     // productid: id,
+      //     // productname: name
+      //     user,
+      // });
       submitForm();
     }
   }, [errors]);

@@ -13,34 +13,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "biller_statement")
 public class BillerStatement {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "bill_number")
-	private long billNo;
-	
-	@Column(name = "account_number")
+
+	@Column(name ="account_number")
 	private long accountNumber;
-	
-	@Column(name ="timestamp", nullable = true)
-	private LocalDate timestamp;
-	
 	
 	@Column(name = "amount")
 	private long amount;
 	
+	@Column(name = "bill_number")
+	private long billNumber;
 	
 	@Column(name = "biller_service")
 	private String billerService;
 	
-	
-
+	@Column(name = "timeStamp")
+	private LocalDate timeStamp;
 }

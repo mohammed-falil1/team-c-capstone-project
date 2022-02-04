@@ -8,6 +8,7 @@ import com.collabera.account_management_system.Vo.DepositOrWithdraw;
 import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.BillerStatement;
 import com.collabera.account_management_system.entity.User;
+import com.collabera.account_management_system.repo.AccountNumberRepo;
 import com.collabera.account_management_system.repo.AccountRepo;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 import com.collabera.account_management_system.utility.Generators;
@@ -24,8 +25,8 @@ public class AccountService {
 	@Autowired
 	TransactionsService transactionsService;
 
-	@Autowired
-	BillerStatementService billerStatementService;
+//	@Autowired
+//	BillerStatementService billerStatementService;
 
 	public Account addItToAccountTable(User user) {
 		Account account = new Account();
@@ -60,13 +61,6 @@ public class AccountService {
 		}
 
 	}
-	
-	
-	public Account getAccountDetail(long accountNumber) {
-		Account account = accountRepo.findAccountsByAccountNumber(accountNumber);
-		return account;
-	}
-	
 
 	public String billerPayment(BillerPayment billerPayment) {
 		Account account = accountRepo.findAccountsByAccountNumber(ApplicationConstants.ACCOUNT_NUMBER);
@@ -75,20 +69,29 @@ public class AccountService {
 			accountRepo.save(account);
 			BillerStatement billerStatement = new BillerStatement();
 			billerStatement.setAccountNumber(account.getAccountNumber());
-			billerStatement.setBillNo(billerPayment.getBillNumber());
-			billerStatement.setTimestamp(Generators.getTimeStamp());
+			billerStatement.setBillNumber(billerPayment.getBillNumber());
+			billerStatement.setTimeStamp(Generators.getTimeStamp());
 			billerStatement.setAmount(billerPayment.getAmount());
 			billerStatement.setBillerService(billerPayment.getBillerService());
-			billerStatementService.addItToBillerStatementTable(billerStatement);
+//			billerStatementService.addItToBillerStatementTable(billerStatement);
 			DepositOrWithdraw depositOrWithdraw = new DepositOrWithdraw();
-			depositOrWithdraw.setRemarks(billerPayment.getBillerService()+"Service");
+			depositOrWithdraw.setRemarks(billerPayment.getBillerService() + "Service");
 			depositOrWithdraw.setAmount(billerPayment.getAmount());
 			depositOrWithdraw.setType(ApplicationConstants.DEBIT);
-			transactionsService.addItToTransactionTable(account,depositOrWithdraw );
+			transactionsService.addItToTransactionTable(account, depositOrWithdraw);
 			return ApplicationConstants.SUCCESS;
 		}
 
 		return ApplicationConstants.INSUFFICIENT_BALANCE;
+	}
+
+	public Account getAccountInfo(long accountNumber) {
+
+		return accountRepo.findAccountsByAccountNumber(accountNumber);
+	}
+	
+	public void saveItInAccountRepo(Account account) {
+		accountRepo.save(account);
 	}
 
 }

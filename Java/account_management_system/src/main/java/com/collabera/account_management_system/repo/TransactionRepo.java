@@ -13,4 +13,7 @@ public interface TransactionRepo  extends JpaRepository<TransactionTable, Intege
 
 	List<TransactionTable> findByTimestampBetween(LocalDate localDateFrom, LocalDate localDateTo);
 
+	List<TransactionTable> findByAccountNumberAndTimestampBetween(long accountNumber, LocalDate localDateFrom,
+			LocalDate localDateTo);
+
 }

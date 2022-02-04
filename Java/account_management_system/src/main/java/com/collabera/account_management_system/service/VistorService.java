@@ -59,8 +59,6 @@ public class VistorService {
 		user.setApplicationId(generators.getApplicationId());
 		user.setTimestamp(Generators.getTimeStamp());
 		user.setUserId(generators.getUserId());
-//		Set<AccountApproval> createdSet = addingChild(user);
-//		user.setAccountApproval(createdSet)
 		AccountApproval accountApproval = addingChild(user.getUserId());
 		user.setAccountApproval(accountApproval);
 		String response;

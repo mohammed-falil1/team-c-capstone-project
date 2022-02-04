@@ -1,8 +1,5 @@
 package com.collabera.account_management_system.entity;
 
-import java.time.LocalDate;
-
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,25 +15,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "biller_registered")
-public class BillerRegister {
+@Table(name = "service_providers")
+public class SericeProviders {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "account_number")
-	private long accountNumber;
-
-	@Column(name = "timestamp")
-	private LocalDate timeStamp;
-
-	@Column(name = "consumer_number")
-	private long consumerNumber;
-
-	@Column(name = "biller_name")
-	private String billerName;
-	
-	
+	@Column(name = "service")
+	private String service;
 
 }

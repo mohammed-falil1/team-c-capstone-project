@@ -34,7 +34,7 @@ public class AccountController {
 	@GetMapping("/stmts/{from}/{to}")
 	public ResponseEntity<List<TransactionTable>> getStatement(@PathVariable String from, @PathVariable String to) {
 
-		List<TransactionTable> response = transactionService.getTransactions(from, to);
+		List<TransactionTable> response = transactionService.getTransactions(ApplicationConstants.ACCOUNT_NUMBER , from, to);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
