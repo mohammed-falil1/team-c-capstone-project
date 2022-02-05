@@ -1,0 +1,113 @@
+2022-02-05 12:19:43.834  INFO 1368 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-05 12:19:43.951  INFO 1368 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 102 ms. Found 13 JPA repository interfaces.
+2022-02-05 12:19:44.968  INFO 1368 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-05 12:19:44.988  INFO 1368 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-05 12:19:44.989  INFO 1368 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-05 12:19:45.106  INFO 1368 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-05 12:19:45.107  INFO 1368 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2036 ms
+2022-02-05 12:19:45.833  INFO 1368 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-05 12:19:46.048  INFO 1368 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-05 12:19:47.195  INFO 1368 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-05 12:19:48.190  WARN 1368 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-05 12:19:48.810  INFO 1368 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-05 12:19:59.594  INFO 1368 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-05 12:19:59.956 ERROR 1368 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger Fatal
+2022-02-05 12:19:59.958  WARN 1368 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger warn
+2022-02-05 12:19:59.959 ERROR 1368 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : logger error
+2022-02-05 12:22:58.487  INFO 18620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-05 12:22:58.605  INFO 18620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 13 JPA repository interfaces.
+2022-02-05 12:22:59.604  INFO 18620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-05 12:22:59.626  INFO 18620 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-05 12:22:59.627  INFO 18620 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-05 12:22:59.731  INFO 18620 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-05 12:22:59.732  INFO 18620 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2015 ms
+2022-02-05 12:23:00.496  INFO 18620 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-05 12:23:00.709  INFO 18620 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-05 12:23:01.808  INFO 18620 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-05 12:23:02.704  WARN 18620 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-05 12:23:03.319  INFO 18620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-05 12:23:18.138  INFO 18620 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-05 12:23:18.139  INFO 18620 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-05 12:23:18.141  INFO 18620 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-02-05 12:23:18.446 ERROR 18620 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger Fatal
+2022-02-05 12:23:18.458 ERROR 18620 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : logger error
+2022-02-05 12:24:01.269  INFO 12916 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-05 12:24:01.395  INFO 12916 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 101 ms. Found 13 JPA repository interfaces.
+2022-02-05 12:24:02.386  INFO 12916 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-05 12:24:02.412  INFO 12916 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-05 12:24:02.412  INFO 12916 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-05 12:24:02.531  INFO 12916 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-05 12:24:02.532  INFO 12916 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2018 ms
+2022-02-05 12:24:02.804  INFO 12916 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-05 12:24:02.878  INFO 12916 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-02-05 12:24:03.143  INFO 12916 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-05 12:24:03.287  INFO 12916 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-05 12:24:03.489  INFO 12916 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-05 12:24:03.536  INFO 12916 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-02-05 12:24:04.625  INFO 12916 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-05 12:24:04.648  INFO 12916 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-05 12:24:05.661  WARN 12916 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-05 12:24:06.293  INFO 12916 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-05 12:24:09.605  INFO 12916 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-05 12:24:09.606  INFO 12916 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-05 12:24:09.609  INFO 12916 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-02-05 12:24:09.939 ERROR 12916 --- [http-nio-8080-exec-1] c.c.a.controller.AdminController         : Logger Fatal
+2022-02-05 12:24:09.941 ERROR 12916 --- [http-nio-8080-exec-1] c.c.a.controller.AdminController         : logger error
+2022-02-05 12:25:13.665 ERROR 12916 --- [http-nio-8080-exec-4] c.c.a.controller.AdminController         : Logger Fatal
+2022-02-05 12:25:13.666 ERROR 12916 --- [http-nio-8080-exec-4] c.c.a.controller.AdminController         : logger error
+2022-02-05 12:25:29.313 ERROR 15824 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.collabera.accountmanagementsystem' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.collabera.accountmanagementsystem
+    Value: all
+    Origin: class path resource [application.properties] - 26:55
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.all)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2022-02-05 12:26:08.096  INFO 22376 --- [main] c.c.a.AccountManagementSystemApplication : Starting AccountManagementSystemApplication using Java 1.8.0_311 on STANs-MSI with PID 22376 (C:\Users\STANs_MSI\Documents\GitHub\NoRepoFolderCapstoneProj\account_management_system\target\classes started by STANs_MSI in C:\Users\STANs_MSI\Documents\GitHub\NoRepoFolderCapstoneProj\account_management_system)
+2022-02-05 12:26:08.110 DEBUG 22376 --- [main] c.c.a.AccountManagementSystemApplication : Running with Spring Boot v2.6.3, Spring v5.3.15
+2022-02-05 12:26:08.111  INFO 22376 --- [main] c.c.a.AccountManagementSystemApplication : No active profile set, falling back to default profiles: default
+2022-02-05 12:26:08.884  INFO 22376 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-05 12:26:09.000  INFO 22376 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 95 ms. Found 13 JPA repository interfaces.
+2022-02-05 12:26:09.976  INFO 22376 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-05 12:26:10.001  INFO 22376 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-05 12:26:10.002  INFO 22376 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-05 12:26:10.103  INFO 22376 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-05 12:26:10.104  INFO 22376 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1938 ms
+2022-02-05 12:26:10.351  INFO 22376 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-05 12:26:10.435  INFO 22376 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-02-05 12:26:10.698  INFO 22376 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-05 12:26:10.846  INFO 22376 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-05 12:26:11.062  INFO 22376 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-05 12:26:11.120  INFO 22376 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-02-05 12:26:12.168  INFO 22376 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-05 12:26:12.191  INFO 22376 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-05 12:26:13.111  WARN 22376 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-05 12:26:13.764  INFO 22376 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-05 12:26:13.788  INFO 22376 --- [main] c.c.a.AccountManagementSystemApplication : Started AccountManagementSystemApplication in 6.241 seconds (JVM running for 6.743)
+2022-02-05 12:26:19.380  INFO 22376 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-05 12:26:19.393  INFO 22376 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-05 12:26:19.395  INFO 22376 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-02-05 12:26:19.724 DEBUG 22376 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger debug
+2022-02-05 12:26:19.737  INFO 22376 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger info
+2022-02-05 12:26:19.737 ERROR 22376 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger Fatal
+2022-02-05 12:26:19.737  WARN 22376 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : Logger warn
+2022-02-05 12:26:19.738 ERROR 22376 --- [http-nio-8080-exec-2] c.c.a.controller.AdminController         : logger error

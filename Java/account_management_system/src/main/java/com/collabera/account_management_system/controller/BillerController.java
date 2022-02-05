@@ -48,10 +48,12 @@ public class BillerController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/mybillers")
-	public ResponseEntity<List<BillerRegister>> myBillers(long accountNumber){
-		return null;
+	@GetMapping("/mybillers/{accountnumber}")
+	public ResponseEntity<List<BillerRegister>> myBillers(@PathVariable("accountnumber") long accountNumber){
+		List<BillerRegister> billerRegisterList=  billerService.getBillersOf(accountNumber);
+		return ResponseEntity.ok(billerRegisterList);
 	}
+	
 
 	@GetMapping("/biller-stmt/{from}/{to}")
 	public ResponseEntity<List<BillerStatement>> getStatement(@PathVariable("from") String from,
@@ -60,5 +62,4 @@ public class BillerController {
 				from, to);
 		return ResponseEntity.ok(billerStatementList);
 	}
-
 }

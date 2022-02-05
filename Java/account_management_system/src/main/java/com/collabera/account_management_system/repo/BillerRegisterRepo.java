@@ -11,6 +11,8 @@ import com.collabera.account_management_system.entity.BillerRegister;
 @Repository
 public interface BillerRegisterRepo extends JpaRepository<BillerRegister, Integer> {
 
+	List<BillerRegister> findBiller_registeredByAccountNumber(long accountNumber);
+
 	
 	
 	

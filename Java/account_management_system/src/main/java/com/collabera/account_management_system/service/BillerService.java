@@ -34,7 +34,7 @@ public class BillerService {
 
 	@Autowired
 	TransactionsService transactionsService;
-	
+
 	@Autowired
 	ServiceProviderRepo serviceProviderRepo;
 
@@ -69,20 +69,23 @@ public class BillerService {
 
 	}
 
-	public List<BillerStatement> getTransactions(long accountNumber,String from, String to) {
+	public List<BillerStatement> getTransactions(long accountNumber, String from, String to) {
 
 		LocalDate localDateTo = LocalDate.parse(to);
 		LocalDate localDateFrom = LocalDate.parse(from);
-		
-		return billerStatementRepo.findByAccountNumberAndTimeStampBetween(accountNumber,
-		localDateFrom, localDateTo);
-	
+
+		return billerStatementRepo.findByAccountNumberAndTimeStampBetween(accountNumber, localDateFrom, localDateTo);
+
 	}
 
 	public List<SericeProviders> getAllBillers() {
-		
+
 		return serviceProviderRepo.findAll();
 	}
-	
+
+	public List<BillerRegister> getBillersOf(long accountNumber) {
+		return billerRegisterRepo.findBiller_registeredByAccountNumber(accountNumber);
+
+	}
 
 }
