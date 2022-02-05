@@ -1,45 +1,44 @@
-import React from "react";
-// import "../CSS/BillerProvider.css";
+import axios from "axios";
+
+import React, { useEffect } from "react";
+
 import { useState } from "react";
 
 function BillerPay() {
-  const [billerAccount, setBillerAccount] = useState("");
-  const [billNo, setBillerNo] = useState("");
+  const [billNumber, setBillerNumber] = useState("");
+  const [amount, setAmount] = useState("");
+  const [submit, isSubmitted] = useState();
+  const [registeredBiller, setRegisteredBiller] = useState([]);
 
   const handleSubmit = (e) => {
-    const customer = { billerNo, amount };
-    var provider = document.getElementById("select").value;
-    var billerNo = document.getElementById("billerno").value;
-    var amount = document.getElementById("amount").value;
-    console.log("select " + provider);
-    console.log("billerNo " + billerNo);
+    console.log("billerNo " + billNumber);
     console.log("billerNo " + amount);
-    console.log(
-      "url " +
-        "http://localhost:8080/billerregister/billername/" +
-        provider +
-        "/" +
-        billerNo +
-        "/" +
-        amount +
-        "/"
-    );
-    fetch(
-      "http://localhost:8080/billerregister/billername/" +
-        provider +
-        "/" +
-        billerNo +
-        "/" +
-        amount,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    ).then(() => {
-      alert("Biller Provider Succesfully. go to Biller transation Page...");
-    });
+    isSubmitted(true);
     e.preventDefault();
   };
+
+  useEffect(() => {
+    const myBillers = "http://localhost:8080/biller/mybillers/100001";
+    axios.get(myBillers).then((body) => {
+      console.log(body.data);
+      setRegisteredBiller(body.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      let provider = document.getElementById("mySelect").value;
+      console.log("select " + provider);
+      const billPayUrl = "http://localhost:8080/biller/biller-pay";
+      const billerPay = {
+        amount: amount,
+        billNumber: billNumber,
+        billerService: provider,
+      };
+
+      axios.post(billPayUrl, billerPay);
+    }
+  }, [submit]);
 
   return (
     <div>
@@ -49,7 +48,7 @@ function BillerPay() {
             <div class="form-content">
               <div class="form-items">
                 <h3>Biller Pay</h3>
-                <form class="requires-validation">
+                <form class="requires-validation" onSubmit={handleSubmit}>
                   <div class="col-md-12 mt-3">
                     <label
                       for="pan-card"
@@ -61,10 +60,10 @@ function BillerPay() {
                       // value={this.state.selectValue}
                       id="mySelect"
                     >
-                      <option value="">Choose registered biller</option>
-                      <option>Airtel</option>
-                      <option>Jio</option>
-                      <option>VI</option>
+                      <option value={0}>Choose registered biller</option>
+                      {registeredBiller.map((v) => (
+                        <option value={v.billerName}>{v.billerName}</option>
+                      ))}
                     </select>
                   </div>
 
@@ -80,6 +79,8 @@ function BillerPay() {
                       class="form-control"
                       id="cc-name"
                       placeholder="Enter Your Bill No"
+                      value={billNumber}
+                      onChange={(e) => setBillerNumber(e.target.value)}
                       required
                     />
                   </div>
@@ -95,6 +96,8 @@ function BillerPay() {
                       type="number"
                       class="form-control"
                       id="cc-name"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
                       placeholder="Enter Your Bill Amount"
                       required
                     />

@@ -1,65 +1,80 @@
+import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 
-
+const BillerStatement = () => {
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [statement, setStatement] = useState([]);
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
+  useEffect(() => {
   
-    const BillerStatement = () => {
-        const [biller_statement, setBiller_statement] = useState([]);
-      
-        const handleClick = (e) => {
-          e.preventDefault();
-        };
-      
-        useEffect(() => {
-          const customer = { biller_statement };
-          fetch("http://localhost:8080/billerstatement/", {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          })
-            .then((response) => response.json())
-            .then((body) => {
-              setBiller_statement(body);
-            });
-        }, []);
+
+    if (from.length > 0 && to.length > 0) {
+      const getBillerStatement =
+        "http://localhost:8080/biller/biller-stmt/" + from + "/" + to;
+      axios.get(getBillerStatement).then((body) => {
+        setStatement(body.data);
+      });
+    }
+  }, [from, to]);
   return (
     <div>
-        <br></br>
-        <center>
-             <h1>Biller Statement</h1> 
-             </center>
-             <br></br>
-    <table class="table">
-  <thead class="table-dark">
-    <tr>
-    <th scope="col">Serial No.</th>
-    <th scope="col">Bill No.</th>
-    <th scope="col">Transation Id</th>
-    <th scope="col">Bill_Register Id</th>
-      <th scope="col">Account No.</th>
-      <th scope="col">Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>135</td>
-      <td>1</td>
-      <td>101</td>
-      <td>567888</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>31562</td>
-      <td>2</td>
-      <td>102</td>
-      <td>4156627</td>
-      <td>2000</td>
-    </tr>
-  </tbody>
-</table>
-
-  </div>
-);
+      <br></br>
+      <center>
+        <h1>Biller Statement</h1>
+      </center>
+      <br></br>
+      <p>
+        {from} and {to}
+      </p>
+      <div style={{ paddingBottom: "20px" }}>
+        <label>From</label>
+        <input
+          className="form-control"
+          type="date"
+          name="dob"
+          id="dob"
+          value={from}
+          onChange={(e) => setFrom(e.target.value)}
+          required
+        />
+        <label>To</label>
+        <input
+          className="form-control"
+          type="date"
+          name="dob"
+          id="dob"
+          value={to}
+          onChange={(e) => setTo(e.target.value)}
+          required
+        />
+      </div>
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Serial No.</th>
+            <th scope="col">Date</th>
+            <th scope="col">Service</th>
+            <th scope="col">Bill No.</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {statement.map((item, index) => (
+            <tr>
+              <th scope="row">{index+1}</th>
+              <td>{item.timeStamp}</td>
+              <td>{item.billerService}</td>
+              <td>{item.billNumber}</td>
+              <td>{item.amount}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 export default BillerStatement;

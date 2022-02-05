@@ -7,21 +7,19 @@ function BillerRegister() {
   const [consumerNumber, setConsumerNumber] = useState("");
   const [value, setValue] = useState([]);
   const [submit, isSubmitted] = useState();
-  const getServicesUrl = "http://localhost:8080/biller/get-services";
 
   useEffect(() => {
-    fetch(getServicesUrl, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((body) => {
-        setValue(body);
-        console.log(body);
-      });
+    console.log("inside useEffect 1 ");
+    const getServicesUrl = "http://localhost:8080/biller/get-services";
+
+    axios.get(getServicesUrl).then((body) => {
+      console.log(body.data);
+      setValue(body.data);
+    });
   }, []);
 
   useEffect(() => {
+    console.log("inside useEffect 2 ");
     if (submit) {
       const billerRegisterUrl = "http://localhost:8080/biller/biller-register";
       const billerRegister = {
