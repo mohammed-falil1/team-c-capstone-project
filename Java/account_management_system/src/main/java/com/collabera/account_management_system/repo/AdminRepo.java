@@ -13,6 +13,8 @@ public interface AdminRepo extends JpaRepository<AccountApproval, Integer> {
 
 	List<AccountApproval> findByTimestampBetween(LocalDate localDateFrom, LocalDate localDateTo);
 
+	List<AccountApproval> findAccount_approvalByStatus(String criteria);
+
 	
 
 }

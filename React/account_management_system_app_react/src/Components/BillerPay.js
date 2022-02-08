@@ -7,16 +7,15 @@ import { useState } from "react";
 function BillerPay() {
   const [billNumber, setBillerNumber] = useState("");
   const [amount, setAmount] = useState("");
-  const [submit, isSubmitted] = useState();
+  const [submit, isSubmitted] = useState(false);
   const [registeredBiller, setRegisteredBiller] = useState([]);
 
   const handleSubmit = (e) => {
     console.log("billerNo " + billNumber);
-    console.log("billerNo " + amount);
+    console.log("amount " + amount);
     isSubmitted(true);
     e.preventDefault();
   };
-
   useEffect(() => {
     const myBillers = "http://localhost:8080/biller/mybillers/100001";
     axios.get(myBillers).then((body) => {
@@ -24,9 +23,8 @@ function BillerPay() {
       setRegisteredBiller(body.data);
     });
   }, []);
-
   useEffect(() => {
-    if (isSubmitted) {
+    if (submit === true) {
       let provider = document.getElementById("mySelect").value;
       console.log("select " + provider);
       const billPayUrl = "http://localhost:8080/biller/biller-pay";
@@ -35,11 +33,14 @@ function BillerPay() {
         billNumber: billNumber,
         billerService: provider,
       };
-
-      axios.post(billPayUrl, billerPay);
+      axios.post(billPayUrl, billerPay).then((body) => {
+        console.log(body);
+        alert("Success");
+      });
+      console.log("sent");
     }
   }, [submit]);
-
+  
   return (
     <div>
       <div class="form-body ">

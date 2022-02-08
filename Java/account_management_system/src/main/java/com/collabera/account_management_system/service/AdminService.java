@@ -44,7 +44,7 @@ public class AdminService {
 //	Account account;
 
 	@Autowired
-	VistorService vistorService;
+	VisitorService vistorService;
 
 	@Autowired
 	EmailSenderService emailSenderService;
@@ -75,7 +75,7 @@ public class AdminService {
 
 		if (user != null) {
 			System.out.print("inside if cases and userId = " + userId);
-			accountApprovalService.updateStatus(userId);
+			accountApprovalService.updateStatus(userId,ApplicationConstants.ADMIN_APPROVAL_ACCEPTED);
 			userRepo.save(user);
 			System.out.println("User initial Balace "+user.getInitialBalance());
 			depositOrWithdraw.setAmount(user.getInitialBalance());
@@ -86,7 +86,7 @@ public class AdminService {
 			transactionsService.addItToTransactionTable(account,depositOrWithdraw);
 
 			// send email to the user on account opening
-			sendEmailAfterAccountApproval(user);
+//			sendEmailAfterAccountApproval(user);
 			return true;
 		}
 		return false;
@@ -99,21 +99,12 @@ public class AdminService {
 
 	}
 
+	public List<AccountApproval> findAccount_approvalByStatus(String criteria) {
+		
+		return adminRepo.findAccount_approvalByStatus(criteria);
+	}
 
-//	public boolean checkUser(int userId) {
-//
-//		User user = visitorRepo.findUsersByUserId(userId);
-//
-//		if (user == null) {
-//			
-//			createNewAccount(userId);
-//			return false;
-//		} else {
-//			
-//			
-//			return true;
-//		}
-//
-//	}
+
+
 
 }

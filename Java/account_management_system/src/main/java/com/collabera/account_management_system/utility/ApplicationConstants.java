@@ -14,5 +14,10 @@ public class ApplicationConstants {
 	public static final String CREDIT = "Credit";
 	public static final String INSUFFICIENT_BALANCE = "Insufficient Balance";
 	public static final String SUCCESS = "Success";
+	
+	
+	public static String ADMIN_APPROVAL_REQUESTED="requested";
+	public static String ADMIN_APPROVAL_ACCEPTED="accepted";
+	public static String ADMIN_APPOROVAL_REJECTED="rejected";
 
 }

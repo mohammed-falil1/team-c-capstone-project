@@ -10,8 +10,6 @@ const BillerStatement = () => {
     e.preventDefault();
   };
   useEffect(() => {
-  
-
     if (from.length > 0 && to.length > 0) {
       const getBillerStatement =
         "http://localhost:8080/biller/biller-stmt/" + from + "/" + to;
@@ -65,7 +63,7 @@ const BillerStatement = () => {
         <tbody>
           {statement.map((item, index) => (
             <tr>
-              <th scope="row">{index+1}</th>
+              <th scope="row">{index + 1}</th>
               <td>{item.timeStamp}</td>
               <td>{item.billerService}</td>
               <td>{item.billNumber}</td>

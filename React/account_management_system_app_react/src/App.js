@@ -13,13 +13,14 @@ import AddPayee from "./Components/AddPayee";
 import SignUpPage from "./Components/SignUpPage";
 import BillerPay from "./Components/BillerPay";
 import BillerStatement from "./Components/BillerStatement";
+import AdminApproval from "./Components/AdminApprovalPage";
+import ApprovalRequested from "./Components/ApprovalRequested";
 function App() {
   return (
     <div className="app">
       <BrowserRouter>
         <NavBar />
         <Routes>
-          {/* <Route path="/NavBar" element={NavBar} /> */}
           <Route exact path="/" element={<SignUpPage />} />
           <Route exact path="/Home" element={<Home />} />
           <Route exact path="/BillerPay" element={<BillerPay />} />
@@ -29,7 +30,7 @@ function App() {
           <Route exact path="/withdraw" element={<Withdraw />} />
           <Route exact path="/transfer" element={<Transfer />} />
           <Route exact path="/addPayee" element={<AddPayee />} />
-
+          <Route exact path="/admin-approval" element={<AdminApproval />} />
           <Route exact path="/About" element={<About />} />
         </Routes>
       </BrowserRouter>

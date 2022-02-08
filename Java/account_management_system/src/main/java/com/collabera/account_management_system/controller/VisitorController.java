@@ -1,5 +1,7 @@
 package com.collabera.account_management_system.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -26,7 +28,7 @@ import java.util.Optional;
 import com.collabera.account_management_system.entity.AadharDb;
 import com.collabera.account_management_system.entity.User;
 import com.collabera.account_management_system.service.FileService;
-import com.collabera.account_management_system.service.VistorService;
+import com.collabera.account_management_system.service.VisitorService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +42,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class VisitorController {
 
 	@Autowired
-	VistorService vistorService;
+	VisitorService vistorService;
 
 	@Autowired
 	FileService fileService;
@@ -53,6 +55,8 @@ public class VisitorController {
 
 	@Autowired
 	Optional<PanCardDb> panCard;
+	
+	
 
 	@PostMapping("/new-account")
 	public ResponseEntity<String> createAccount(@RequestBody User user) {

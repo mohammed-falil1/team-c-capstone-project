@@ -51,6 +51,11 @@ const NavBar = () => {
                   Biller Statement
                 </a>
               </li>
+              <li>
+                <a className="nav-link" href="/admin-approval">
+                  Admin Approval
+                </a>
+              </li>
             </ul>
             <button
               className="btn btn-outline-secondary"

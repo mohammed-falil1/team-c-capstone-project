@@ -43,6 +43,7 @@ public class BillerController {
 
 	@PostMapping("/biller-pay")
 	public ResponseEntity<String> payBiller(@RequestBody BillerPayment billerPayment) {
+		System.out.println("Inside biller pay");
 		billerPayment.setAccountNumber(ApplicationConstants.ACCOUNT_NUMBER);
 		String response = billerService.pay(billerPayment);
 		return ResponseEntity.ok(response);

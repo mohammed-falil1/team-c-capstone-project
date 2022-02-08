@@ -16,13 +16,13 @@ public class AccountApprovalService {
 	@Autowired
 	AccountApproval accountApproval;
 
-	public void updateStatus(int userId) {
+	public void updateStatus(int userId,String status) {
 		AccountApproval accountApprovalFromDb = accountApprovalRepo.findAccount_approvalByUserId(userId);
 //		accountApproval.setStatus("YES");
 //		accountApproval.setTimestamp(Generators.getTimeStamp());
 //		accountApproval.setUserId(userId);
 		
-		accountApprovalFromDb.setStatus("YES");
+		accountApprovalFromDb.setStatus(status);
 		accountApprovalRepo.save(accountApprovalFromDb);
 		
 	}
