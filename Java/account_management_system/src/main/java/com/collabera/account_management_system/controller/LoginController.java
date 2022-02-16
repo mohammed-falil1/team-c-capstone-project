@@ -20,7 +20,6 @@ import com.collabera.account_management_system.entity.AdminLoginEntity;
 import com.collabera.account_management_system.service.AdminService;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/auth")
