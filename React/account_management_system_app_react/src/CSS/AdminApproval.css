@@ -1,0 +1,11 @@
+#btnRequested,
+#btnAccepted,
+#btnRejected,
+#btnLogout {
+  margin: 20px 0px 10px 10px;
+  border-radius: 10px;
+}
+
+#headline {
+  text-align: center;
+}

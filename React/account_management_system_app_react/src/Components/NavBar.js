@@ -1,9 +1,10 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "../CSS/NavBar.css";
+import { useNavigate } from "react-router-dom";
 
-const handler = () => {};
+const NavBar = (props) => {
+  const navigate = useNavigate();
 
-const NavBar = () => {
   return (
     <div className="top-navbar">
       <nav className="  navbar navbar-expand-lg navbar-dark  ">
@@ -11,52 +12,99 @@ const NavBar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="/">
-                  SignUp
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/deposit");
+                  }}
+                >
+                  Deposit/Withdraw
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/deposit">
-                  Deposit
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/withdraw">
+              {/* <li className="nav-item">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/withdraw");
+                  }}
+                >
                   Withdraw
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
-                <a className="nav-link" href="/transfer">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/transfer");
+                  }}
+                >
                   Transfer
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/addPayee">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/addPayee");
+                  }}
+                >
                   AddPayee
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="/BillerRegister">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/BillerRegister");
+                  }}
+                >
                   Biller Register
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/BillerPay">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/BillerPay");
+                  }}
+                >
                   Biller Pay
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/BillerStatement">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/BillerStatement");
+                  }}
+                >
                   Biller Statement
                 </a>
               </li>
-              <li>
-                <a className="nav-link" href="/admin-approval">
-                  Admin Approval
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/acct-stmt");
+                  }}
+                >
+                  Account Statements
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/acct-stmt");
+                  }}
+                >
+                  {props.accountNumber}
+                  {console.log(props.accountNumber + " from navbar")}
                 </a>
               </li>
             </ul>
+           
             <button
               className="btn btn-outline-secondary"
               type="submit"

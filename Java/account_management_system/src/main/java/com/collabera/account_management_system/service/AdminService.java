@@ -12,11 +12,13 @@ import com.collabera.account_management_system.Vo.DepositOrWithdraw;
 import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.AccountApproval;
 import com.collabera.account_management_system.entity.AccountNumber;
+import com.collabera.account_management_system.entity.AdminLoginEntity;
 import com.collabera.account_management_system.entity.ApplicationId;
 import com.collabera.account_management_system.entity.TransactionTable;
 import com.collabera.account_management_system.entity.User;
 import com.collabera.account_management_system.repo.AccountNumberRepo;
 import com.collabera.account_management_system.repo.AccountRepo;
+import com.collabera.account_management_system.repo.AdminLoginRepo;
 import com.collabera.account_management_system.repo.AdminRepo;
 import com.collabera.account_management_system.repo.TransactionRepo;
 import com.collabera.account_management_system.repo.UserRepo;
@@ -60,6 +62,9 @@ public class AdminService {
 
 	@Autowired
 	AccountApprovalService accountApprovalService;
+	
+	@Autowired
+	AdminLoginRepo adminLoginRepo;
 
 	public List<AccountApproval> getApprovals(String from, String to) {
 
@@ -103,6 +108,17 @@ public class AdminService {
 		
 		return adminRepo.findAccount_approvalByStatus(criteria);
 	}
+
+	public Boolean findAdmin_loginByUserNameAndPassword(String userName, String password) {
+		// TODO Auto-generated method stub
+		AdminLoginEntity response=adminLoginRepo.findAdmin_loginByUserNameAndPassword(userName,password);
+		if(response==null) {
+			return false;
+		}
+		return true;
+	}
+	
+
 
 
 

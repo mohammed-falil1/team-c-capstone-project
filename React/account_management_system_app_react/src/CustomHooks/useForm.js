@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
+import FormData from "form-data";
 
 function useForm({ submitForm, Validate }) {
   const [values, setValues] = useState({
@@ -65,71 +66,14 @@ function useForm({ submitForm, Validate }) {
         dob: values.dob,
         email: values.email,
         mobileNumber: values.mobileNumber,
-        panCard: values.panCard,
-        aadhar: values.aadhar,
+        panCardNumber: values.panCard,
+        aadharNumber: values.aadhar,
         uploadAddress: "somethingAddress",
         initialBalance: values.initialBalance,
       };
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: { "Content-Type": " multipart/form-data" },
-      //   body: user.aadharFile,
-      // };
 
-      // fetch(baseURL, requestOptions)
-      //   .then((response) => response.json())
-      //   .then((data) => console.log(data));
+      axios.post(newAccountUrl, user);
 
-      // formData.append("aadharFile", aadharFile);
-      // axios
-      //   .post(baseURL, {
-      //     formData,
-      //   })
-      //   .then(() => {
-      //     alert("User Successfully registered ");
-      //   });
-
-      //this is working
-      // let formData = new FormData();
-      // formData.append("aadharFile", aadharFile);
-      // const headers = {
-      //   // 'Authorization': 'Bearer my-token',
-      //   "Content-Type": " multipart/form-data",
-      // };
-      // axios.post(baseURL, formData, headers).then(() => {
-      //   alert("User Successfully registered ");
-      // });
-      //till this
-
-      // formData.append("user", user);
-      let formData;
-
-      const headers = {
-        // 'Authorization': 'Bearer my-token',
-        "Content-Type": "multipart/form-data",
-      };
-      axios.post(newAccountUrl, user).then(() => {
-        alert("User Successfully registered ");
-        formData = new FormData();
-        formData.append("aadharFile", aadharFile);
-        axios.post(aadharUploadUr, aadharFile, headers).then(() => {
-          formData = new FormData();
-          formData.append("panCardFile", panCardFile);
-          axios.post(panCardUploadUrl, panCardFile, headers);
-        });
-      });
-
-      console.log(formData);
-      console.log(JSON.stringify(formData));
-
-      // axios({
-      //   method: "post",
-      //   url: baseURL,
-      //   body:
-      //     // productid: id,
-      //     // productname: name
-      //     user,
-      // });
       submitForm();
     }
   }, [errors]);

@@ -1,18 +1,26 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import NavBar from "./NavBar";
 
-function BillerRegister() {
+function BillerRegister(props) {
   const [billerName, setBillerName] = useState("");
   const [consumerNumber, setConsumerNumber] = useState("");
   const [value, setValue] = useState([]);
   const [submit, isSubmitted] = useState();
 
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: props.token,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  };
+
   useEffect(() => {
     console.log("inside useEffect 1 ");
     const getServicesUrl = "http://localhost:8080/biller/get-services";
 
-    axios.get(getServicesUrl).then((body) => {
+    axios.get(getServicesUrl, { headers: headers }).then((body) => {
       console.log(body.data);
       setValue(body.data);
     });
@@ -26,9 +34,12 @@ function BillerRegister() {
         billerName: billerName,
         consumerNumber: consumerNumber,
       };
-      axios.post(billerRegisterUrl, billerRegister).then(() => {
-        alert("registered SucessFully");
-      });
+      axios
+        .post(billerRegisterUrl, billerRegister, { headers: headers })
+        .then(() => {
+          alert("registered SuccessFully");
+          document.getElementById("consumerno").value = "";
+        });
     }
   }, [submit]);
 
@@ -43,6 +54,7 @@ function BillerRegister() {
 
   return (
     <div>
+         <NavBar accountNumber={props.accountNumber} />
       <div className="form-body ">
         <div className="row">
           <div className="form-holder">

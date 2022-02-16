@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collabera.account_management_system.Vo.DepositOrWithdraw;
+import com.collabera.account_management_system.entity.PayeeTable;
 import com.collabera.account_management_system.entity.TransactionTable;
 import com.collabera.account_management_system.service.AccountService;
 import com.collabera.account_management_system.service.TransactionsService;
 import com.collabera.account_management_system.utility.ApplicationConstants;
+import com.collabera.account_management_system.Vo.TransferVO;
 
 
 @RestController
@@ -42,14 +44,29 @@ public class AccountController {
 	
 	@PostMapping("/depost-or-withdraw")
 	public ResponseEntity<String> depositOrWithdrawAmount(@RequestBody DepositOrWithdraw depositOrWithdraw) {
-		ApplicationConstants.ACCOUNT_NUMBER=1;
 		String response = accountService.depositOrWithdrawService(depositOrWithdraw);
 		return ResponseEntity.ok(response);
 
 		
 	}
 	
+	@PostMapping("/add-payee")
+	public ResponseEntity<Boolean>addPayee(@RequestBody PayeeTable payeeTable){
+		boolean response=accountService.addPayee(payeeTable);
+		return ResponseEntity.ok(response);
+	}
 	
+	@GetMapping("/get-payees")
+	public ResponseEntity<List<PayeeTable>> getPayeeList(){
+		List<PayeeTable> payeeList=accountService.getPayeeList(ApplicationConstants.ACCOUNT_NUMBER);
+		return ResponseEntity.ok(payeeList);
+	}
+	
+	@PostMapping("/transfer")
+	public ResponseEntity<Boolean> transfer(@RequestBody TransferVO transferVO){
+		boolean response = accountService.transfer(transferVO);
+		return ResponseEntity.ok(response);
+	}
 	
 	
 	

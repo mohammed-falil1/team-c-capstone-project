@@ -80,8 +80,8 @@ public class User {
 	private byte[] panCardFile;
 	
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Account> account = new HashSet<Account>();
+//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private Set<Account> account = new HashSet<Account>();
 
 //	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	private Set<AccountApproval> accountApproval = new HashSet<AccountApproval>();

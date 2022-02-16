@@ -1,39 +1,54 @@
+import axios from "axios";
 import react from "react";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "../CSS/AddPayee.css";
+import NavBar from "./NavBar";
 
-function AddPayee() {
-  const [values, setValues] = useState({ account: "", shortName: "" });
+function AddPayee(props) {
+  const initState = { account: "", shortName: "" };
+  const [values, setValues] = useState(initState);
 
-  const handleChangeAccount = (event) => {
-    setValues((values) => ({
-      ...values,
-      account: event.target.value,
-    }));
-  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  const handleChangeShortName = (event) => {
-    setValues((values) => ({
-      ...values,
-      shortName: event.target.value,
-    }));
+    setValues({ ...values, [name]: value });
   };
 
   const handleSubmit = (event) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: props.token,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    };
+    const addPayeeUrl = "http://localhost:8080/acc/add-payee";
+    const payeeTable = {
+      shortName: values.shortName,
+      payeeAccountNumber: values.account,
+    };
+    console.log(values);
+    axios
+      .post(addPayeeUrl, payeeTable, { headers: headers })
+      .then((response) => {
+        console.log(response);
+      });
     alert("Payee addition Successful");
+    document.getElementById("accountNumber").value = "";
+    document.getElementById("shortName").value = "";
     event.preventDefault();
   };
 
   return (
     <div>
+        <NavBar accountNumber={props.accountNumber} />
       <div class="form-body ">
         <div class="row">
           <div class="form-holder">
             <div class="form-content">
               <div class="form-items">
                 <h3>Please enter the below details to add a payee</h3>
-                <form class="requires-validation">
+                <form class="requires-validation" onSubmit={handleSubmit}>
                   <div class="col-md-12 mt-3">
                     <label
                       for="pan-card"
@@ -43,12 +58,14 @@ function AddPayee() {
                     </label>
                     <input
                       class="form-control"
-                      name="accountNumber"
+                      name="account"
                       type="number"
                       pattern="[0-9]{6}"
                       placeholder="Minimum 6 digits "
                       required
-                      defaultValue=""
+                      id="accountNumber"
+                      value={values.account}
+                      onChange={handleChange}
                     />
                   </div>
 
@@ -65,8 +82,9 @@ function AddPayee() {
                       type="text"
                       placeholder="Enter short name"
                       required
+                      id="shortName"
                       value={values.shortName}
-                      onChange={handleChangeShortName}
+                      onChange={handleChange}
                     />
                   </div>
 

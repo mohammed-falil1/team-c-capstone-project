@@ -1,37 +1,97 @@
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import React from "react";
+import React, { useState } from "react";
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import BillerRegister from "./Components/BillerRegister";
-import About from "./Components/About";
-import NavBar from "./Components/NavBar";
-import Home from "./Components/Home";
-import Deposit from "./Components/Deposit";
-import Withdraw from "./Components/Withdraw";
+import DepositOrWithdraw from "./Components/DepositOrWithdraw";
+
 import Transfer from "./Components/Transfer";
 import AddPayee from "./Components/AddPayee";
 import SignUpPage from "./Components/SignUpPage";
 import BillerPay from "./Components/BillerPay";
 import BillerStatement from "./Components/BillerStatement";
 import AdminApproval from "./Components/AdminApprovalPage";
-import ApprovalRequested from "./Components/ApprovalRequested";
+import LoginPage from "./Components/LoginPage";
+import AfterLogin from "./Components/AfterLogin";
+import AccountStatements from "./Components/AccountStatements";
+import NavBar from "./Components/NavBar";
+
 function App() {
+  const [token, setToken] = useState();
+  const [accountNumber, setAccountNumber] = useState();
+
   return (
     <div className="app">
       <BrowserRouter>
-        <NavBar />
         <Routes>
-          <Route exact path="/" element={<SignUpPage />} />
-          <Route exact path="/Home" element={<Home />} />
-          <Route exact path="/BillerPay" element={<BillerPay />} />
-          <Route exact path="/BillerRegister" element={<BillerRegister />} />
-          <Route exact path="/BillerStatement" element={<BillerStatement />} />
-          <Route exact path="/deposit" element={<Deposit />} />
-          <Route exact path="/withdraw" element={<Withdraw />} />
-          <Route exact path="/transfer" element={<Transfer />} />
-          <Route exact path="/addPayee" element={<AddPayee />} />
-          <Route exact path="/admin-approval" element={<AdminApproval />} />
-          <Route exact path="/About" element={<About />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <LoginPage
+                setToken={setToken}
+                setAccountNumber={setAccountNumber}
+              />
+            }
+          />
+          <Route exact path="/signup" element={<SignUpPage />} />
+          <Route
+            exact
+            path="/account"
+            element={<AfterLogin accountNumber={accountNumber} />}
+          />
+
+          <Route
+            exact
+            path="/BillerPay"
+            element={<BillerPay token={token} accountNumber={accountNumber} />}
+          />
+          <Route
+            exact
+            path="/BillerRegister"
+            element={
+              <BillerRegister token={token} accountNumber={accountNumber} />
+            }
+          />
+          <Route
+            exact
+            path="/BillerStatement"
+            element={
+              <BillerStatement token={token} accountNumber={accountNumber} />
+            }
+          />
+          <Route
+            exact
+            path="/deposit"
+            element={
+              <DepositOrWithdraw token={token} accountNumber={accountNumber} />
+            }
+          />
+
+          <Route
+            exact
+            path="/transfer"
+            element={<Transfer token={token} accountNumber={accountNumber} />}
+          />
+          <Route
+            exact
+            path="/addPayee"
+            element={<AddPayee token={token} accountNumber={accountNumber} />}
+          />
+          <Route
+            exact
+            path="/admin-approval"
+            element={
+              <AdminApproval token={token} accountNumber={accountNumber} />
+            }
+          />
+          <Route
+            exact
+            path="/acct-stmt"
+            element={
+              <AccountStatements token={token} accountNumber={accountNumber} />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

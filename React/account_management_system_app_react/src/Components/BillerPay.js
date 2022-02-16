@@ -3,8 +3,15 @@ import axios from "axios";
 import React, { useEffect } from "react";
 
 import { useState } from "react";
+import NavBar from "./NavBar";
 
-function BillerPay() {
+function BillerPay(props) {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: props.token,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  };
   const [billNumber, setBillerNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [submit, isSubmitted] = useState(false);
@@ -17,8 +24,10 @@ function BillerPay() {
     e.preventDefault();
   };
   useEffect(() => {
+    console.log(props.token);
+    console.log(headers.AuthorizationOne);
     const myBillers = "http://localhost:8080/biller/mybillers/100001";
-    axios.get(myBillers).then((body) => {
+    axios.get(myBillers, { headers: headers }).then((body) => {
       console.log(body.data);
       setRegisteredBiller(body.data);
     });
@@ -33,16 +42,24 @@ function BillerPay() {
         billNumber: billNumber,
         billerService: provider,
       };
-      axios.post(billPayUrl, billerPay).then((body) => {
-        console.log(body);
-        alert("Success");
-      });
+      axios
+        .post(billPayUrl, billerPay, { headers: headers })
+        .then((response) => {
+          console.log(response.data);
+          if (response.data === "Insufficient Balance") {
+            alert("Sorry Insufficient Balance");
+          } else {
+            alert("Success");
+          }
+        });
+      isSubmitted(false);
       console.log("sent");
     }
   }, [submit]);
-  
+
   return (
     <div>
+       <NavBar accountNumber={props.accountNumber} /> 
       <div class="form-body ">
         <div class="row">
           <div class="form-holder">

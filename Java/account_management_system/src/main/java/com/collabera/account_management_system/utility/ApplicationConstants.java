@@ -8,7 +8,7 @@ public class ApplicationConstants {
 	public static String SENDER_EMAIL_ID = "mohammedfalil70@gmail.com";
 	public static String EMAIL_SUBJECT_APPROVAL = "Your Account has been created";
 
-	public static int ACCOUNT_NUMBER=100001;
+	public static long ACCOUNT_NUMBER=100001;
 
 	public static final String DEBIT = "Debit";
 	public static final String CREDIT = "Credit";

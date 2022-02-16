@@ -1,15 +1,21 @@
 package com.collabera.account_management_system.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.collabera.account_management_system.Vo.BillerPayment;
 import com.collabera.account_management_system.Vo.DepositOrWithdraw;
+import com.collabera.account_management_system.Vo.TransferVO;
 import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.BillerStatement;
+import com.collabera.account_management_system.entity.PayeeTable;
 import com.collabera.account_management_system.entity.User;
 import com.collabera.account_management_system.repo.AccountNumberRepo;
 import com.collabera.account_management_system.repo.AccountRepo;
+import com.collabera.account_management_system.repo.PayeeTableRepo;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 import com.collabera.account_management_system.utility.Generators;
 
@@ -24,6 +30,9 @@ public class AccountService {
 
 	@Autowired
 	TransactionsService transactionsService;
+
+	@Autowired
+	PayeeTableRepo payeeTableRepo;
 
 //	@Autowired
 //	BillerStatementService billerStatementService;
@@ -40,8 +49,7 @@ public class AccountService {
 	}
 
 	public String depositOrWithdrawService(DepositOrWithdraw depositOrWithdraw) {
-
-		Account account = accountRepo.findAccountsById(ApplicationConstants.ACCOUNT_NUMBER);
+		Account account = getAccountInfo(ApplicationConstants.ACCOUNT_NUMBER);
 		if (depositOrWithdraw.getType().equals(ApplicationConstants.CREDIT)) {
 
 			account.setBalance(account.getBalance() + depositOrWithdraw.getAmount());
@@ -62,36 +70,59 @@ public class AccountService {
 
 	}
 
-	public String billerPayment(BillerPayment billerPayment) {
-		Account account = accountRepo.findAccountsByAccountNumber(ApplicationConstants.ACCOUNT_NUMBER);
-		if (account.getBalance() - billerPayment.getAmount() > 1000) {
-			account.setBalance(account.getBalance() - billerPayment.getAmount());
-			accountRepo.save(account);
-			BillerStatement billerStatement = new BillerStatement();
-			billerStatement.setAccountNumber(account.getAccountNumber());
-			billerStatement.setBillNumber(billerPayment.getBillNumber());
-			billerStatement.setTimeStamp(Generators.getTimeStamp());
-			billerStatement.setAmount(billerPayment.getAmount());
-			billerStatement.setBillerService(billerPayment.getBillerService());
-//			billerStatementService.addItToBillerStatementTable(billerStatement);
-			DepositOrWithdraw depositOrWithdraw = new DepositOrWithdraw();
-			depositOrWithdraw.setRemarks(billerPayment.getBillerService() + "Service");
-			depositOrWithdraw.setAmount(billerPayment.getAmount());
-			depositOrWithdraw.setType(ApplicationConstants.DEBIT);
-			transactionsService.addItToTransactionTable(account, depositOrWithdraw);
-			return ApplicationConstants.SUCCESS;
-		}
-
-		return ApplicationConstants.INSUFFICIENT_BALANCE;
-	}
-
 	public Account getAccountInfo(long accountNumber) {
-
-		return accountRepo.findAccountsByAccountNumber(accountNumber);
+		System.out.println(accountNumber);
+		Account account = accountRepo.findAccountsByAccountNumber(accountNumber);
+		return account;
 	}
-	
+
 	public void saveItInAccountRepo(Account account) {
 		accountRepo.save(account);
+	}
+
+	public boolean addPayee(PayeeTable payeeTable) {
+		Account account = accountRepo.findAccountsByAccountNumber(payeeTable.getPayeeAccountNumber());
+		if (account != null) {
+			payeeTable.setPayerAccountNumber(ApplicationConstants.ACCOUNT_NUMBER);
+			payeeTable.setTimestamp(Generators.getTimeStamp());
+			payeeTableRepo.save(payeeTable);
+			return true;
+		}
+		return false;
+	}
+
+	public List<PayeeTable> getPayeeList(long accountNumber) {
+		// TODO Auto-generated method stub
+		return payeeTableRepo.findPayee_tableByPayerAccountNumber(accountNumber);
+	}
+
+	public boolean transfer(TransferVO transferVO) {
+		// TODO Auto-generated method stub
+		Account accountPayer = getAccountInfo(ApplicationConstants.ACCOUNT_NUMBER);
+		Account accountPayee = getAccountInfo(transferVO.getPayeeAccountNumber());
+		if (accountPayer != null && accountPayee != null) {
+			if (accountPayer.getBalance() - transferVO.getAmount() > 1000) {
+				accountPayer.setBalance(accountPayer.getBalance() - transferVO.getAmount());
+				accountRepo.save(accountPayer);
+				DepositOrWithdraw depositOrWithdraw = new DepositOrWithdraw();
+				depositOrWithdraw.setAmount(transferVO.getAmount());
+				depositOrWithdraw.setRemarks(transferVO.getRemarks());
+				depositOrWithdraw.setType(ApplicationConstants.DEBIT);
+				transactionsService.addItToTransactionTable(accountPayer, depositOrWithdraw);
+
+				accountPayee.setBalance(transferVO.getAmount());
+				accountRepo.save(accountPayee);
+				DepositOrWithdraw depositOrWithdraw2 = new DepositOrWithdraw();
+				depositOrWithdraw2.setAmount(transferVO.getAmount());
+				depositOrWithdraw2.setRemarks(transferVO.getRemarks());
+				depositOrWithdraw2.setType(ApplicationConstants.CREDIT);
+				transactionsService.addItToTransactionTable(accountPayee, depositOrWithdraw2);
+				return true;
+			}
+		}
+
+		return false;
+
 	}
 
 }

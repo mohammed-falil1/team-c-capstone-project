@@ -42,12 +42,6 @@ function Validate(values, aadharFile, panCardFile, isChecked) {
     errors.panCard = "PanCard  is invalid";
   }
 
-  // if (values.panCard.length < 1) {
-  //   errors.mobileNumber = "Pancard number required";
-  // } else if (values.panCard.length > 10) {
-  //   errors.mobileNumber = "PanCard number is invalid";
-  // }
-
   if (values.aadhar.length < 1) {
     errors.aadhar = "Aadhar number required";
   } else if (values.aadhar.length > 12) {

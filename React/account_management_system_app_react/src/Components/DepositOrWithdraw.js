@@ -4,16 +4,21 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import NavBar from "./NavBar";
 
-function Transfer(props) {
+function Deposit(props) {
   const [values, setValues] = useState({
-    payeeAccountNumber: "",
     amount: "",
+    type: "",
     remarks: "",
   });
 
   const [submit, isSubmitted] = useState(false);
 
-  const [payeeAccountList, setPayeeAccountList] = useState([]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setValues({ ...values, [name]: value });
+  };
+
   const headers = {
     "Content-Type": "application/json",
     Authorization: props.token,
@@ -21,70 +26,62 @@ function Transfer(props) {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   };
 
-  const getPayeesUrl = "http://localhost:8080/acc/get-payees";
-  const payUrl = "http://localhost:8080/acc/transfer";
+  // const handleChangeAccount = (event) => {
+  //   setValues((values) => ({
+  //     ...values,
+  //     account: event.target.value,
+  //   }));
+  // };
 
-  useEffect(() => {
-    axios.get(getPayeesUrl, { headers: headers }).then((response) => {
-      console.log(response.data);
-      setPayeeAccountList(response.data);
-    });
-  }, []);
+  // const handleChangeAmount = (event) => {
+  //   setValues((values) => ({
+  //     ...values,
+  //     amount: event.target.value,
+  //   }));
+  // };
 
-  useEffect(() => {
-    if (submit === true) {
-      axios.post(payUrl, values, { headers: headers }).then((response) => {
-        console.log(response);
-        isSubmitted(false);
-        alert("Money Transferred Successfully");
-        document.getElementById("amount").value="";
-        document.getElementById("remarks").value=""
-      });
-    }
-  }, [submit]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+  // const handleChangeRemarks = (event) => {
+  //   setValues((values) => ({
+  //     ...values,
+  //     remarks: event.target.value,
+  //   }));
+  // };
 
   const handleSubmit = (event) => {
-    values.payeeAccountNumber = document.getElementById("mySelect").value;
+    alert("Deposit Successful");
+    values.type = document.getElementById("mySelect").value;
     isSubmitted(true);
     event.preventDefault();
   };
 
+  useEffect(() => {
+    if (submit === true) {
+      const depositOrWithdrawUrl =
+        "http://localhost:8080/acc/depost-or-withdraw";
+
+      axios
+        .post(depositOrWithdrawUrl, values, { headers: headers })
+        .then((response) => {
+          if (response.data === "Insufficient Balance") {
+            alert("Sorry ", response.data);
+          } else {
+            alert("Transaction Successful");
+          }
+          isSubmitted(false);
+        });
+    }
+  }, [submit]);
+
   return (
     <div>
-        <NavBar accountNumber={props.accountNumber} />
+      <NavBar accountNumber={props.accountNumber} />
       <div class="form-body ">
         <div class="row">
           <div class="form-holder">
             <div class="form-content">
               <div class="form-items">
-                <h3>Please enter the below details to transfer</h3>
+                <h3>Please enter the below details to deposit</h3>
                 <form class="requires-validation" onSubmit={handleSubmit}>
-                  {/* <div class="col-md-12">
-                    <label
-                      for="pan-card"
-                      style={{ padding: "9px 0px 0px 9px" }}
-                    >
-                      Enter the account number:
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="payeeAccount"
-                      pattern="[0-9]{6}"
-                      placeholder="Minimum 6 digits "
-                      required
-                      value={values.account}
-                      onChange={handleChange}
-                    />
-                  </div> */}
                   <div class="col-md-12 mt-3">
                     <label
                       for="pan-card"
@@ -96,12 +93,8 @@ function Transfer(props) {
                       // value={this.state.selectValue}
                       id="mySelect"
                     >
-                      <option value={0}>Choose registered biller</option>
-                      {payeeAccountList.map((v) => (
-                        <option value={v.payeeAccountNumber}>
-                          {v.payeeAccountNumber}-{v.shortName}
-                        </option>
-                      ))}
+                      <option value="Credit">Credit</option>
+                      <option value="Debit">Debit</option>
                     </select>
                   </div>
                   <div class="col-md-12">
@@ -109,7 +102,7 @@ function Transfer(props) {
                       for="pan-card"
                       style={{ padding: "9px 0px 0px 9px" }}
                     >
-                      Amount to be transferred:
+                      Enter The Amount:
                     </label>
                     <input
                       class="form-control"
@@ -143,7 +136,7 @@ function Transfer(props) {
 
                   <div class="form-button mt-3">
                     <button id="submit" type="submit" class="btn btn-primary">
-                      Transfer
+                      Deposit
                     </button>
                   </div>
                 </form>
@@ -156,4 +149,4 @@ function Transfer(props) {
   );
 }
 
-export default Transfer;
+export default Deposit;

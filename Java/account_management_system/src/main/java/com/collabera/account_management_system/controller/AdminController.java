@@ -33,10 +33,7 @@ public class AdminController {
 	@GetMapping("/users/{from}/{to}")
 	public ResponseEntity<List<AccountApproval>> getUsersFromDate(@PathVariable String from, @PathVariable String to) {
 		List<AccountApproval> accountApprovals = adminService.getApprovals(from, to);
-		logger.debug("Logger debug");
-//		logger.info("Logger info");
-//		logger.warn("Logger warn");
-//		logger.error("logger error");
+		logger.fatal("Logger fatal");
 		return ResponseEntity.ok(accountApprovals);
 
 	}

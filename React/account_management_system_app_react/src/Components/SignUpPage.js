@@ -7,11 +7,9 @@ function SignUpPage() {
   const submitForm = () => {
     setIsSubmitted(true);
   };
-  
 
   useEffect(() => {
     if (isSubmitted) {
-     
     }
   }, [isSubmitted]);
 
@@ -21,7 +19,7 @@ function SignUpPage() {
         <SignUpForm submitForm={submitForm} />
       ) : (
         <>
-          <h1>Success</h1>
+          <h1>Success. You will receive a mail.</h1>
         </>
       )}
     </div>

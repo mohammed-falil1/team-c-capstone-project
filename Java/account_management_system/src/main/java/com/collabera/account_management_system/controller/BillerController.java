@@ -22,7 +22,6 @@ import com.collabera.account_management_system.utility.ApplicationConstants;
 
 @RestController
 @RequestMapping("/biller")
-@CrossOrigin(origins = "http://localhost:3000/")
 public class BillerController {
 
 	@Autowired
@@ -43,7 +42,6 @@ public class BillerController {
 
 	@PostMapping("/biller-pay")
 	public ResponseEntity<String> payBiller(@RequestBody BillerPayment billerPayment) {
-		System.out.println("Inside biller pay");
 		billerPayment.setAccountNumber(ApplicationConstants.ACCOUNT_NUMBER);
 		String response = billerService.pay(billerPayment);
 		return ResponseEntity.ok(response);
