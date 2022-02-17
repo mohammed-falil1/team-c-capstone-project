@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.collabera.account_management_system.Vo.BillerPayment;
 import com.collabera.account_management_system.entity.BillerRegister;
 import com.collabera.account_management_system.entity.BillerStatement;
-import com.collabera.account_management_system.entity.SericeProviders;
+import com.collabera.account_management_system.entity.ServiceProviders;
 import com.collabera.account_management_system.service.BillerService;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 
@@ -28,8 +28,8 @@ public class BillerController {
 	BillerService billerService;
 
 	@GetMapping("/get-services")
-	public ResponseEntity<List<SericeProviders>> getAllBillers() {
-		List<SericeProviders> billerRegisterList =billerService.getAllBillers();
+	public ResponseEntity<List<ServiceProviders>> getAllBillers() {
+		List<ServiceProviders> billerRegisterList =billerService.getAllBillers();
 		return ResponseEntity.ok(billerRegisterList);
 		
 	}

@@ -14,7 +14,7 @@ import AdminApproval from "./Components/AdminApprovalPage";
 import LoginPage from "./Components/LoginPage";
 import AfterLogin from "./Components/AfterLogin";
 import AccountStatements from "./Components/AccountStatements";
-import NavBar from "./Components/NavBar";
+import ChangePassword from "./Components/ChangePassword";
 
 function App() {
   const [token, setToken] = useState();
@@ -91,6 +91,11 @@ function App() {
             element={
               <AccountStatements token={token} accountNumber={accountNumber} />
             }
+          />
+          <Route
+            exact
+            path="/change-password"
+            element={<ChangePassword token={token} />}
           />
         </Routes>
       </BrowserRouter>

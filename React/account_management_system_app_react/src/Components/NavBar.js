@@ -21,16 +21,7 @@ const NavBar = (props) => {
                   Deposit/Withdraw
                 </a>
               </li>
-              {/* <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => {
-                    navigate("/withdraw");
-                  }}
-                >
-                  Withdraw
-                </a>
-              </li> */}
+
               <li className="nav-item">
                 <a
                   className="nav-link"
@@ -96,15 +87,24 @@ const NavBar = (props) => {
                 <a
                   className="nav-link"
                   onClick={() => {
+                    navigate("/change-password");
+                  }}
+                >
+                  Change Password
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  onClick={() => {
                     navigate("/acct-stmt");
                   }}
                 >
-                  {props.accountNumber}
-                  {console.log(props.accountNumber + " from navbar")}
+                  {}
                 </a>
               </li>
             </ul>
-           
+
             <button
               className="btn btn-outline-secondary"
               type="submit"

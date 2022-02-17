@@ -7,9 +7,7 @@ const BillerStatement = (props) => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [statement, setStatement] = useState([]);
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  // };
+
   const headers = {
     "Content-Type": "application/json",
     Authorization: props.token,
@@ -27,15 +25,13 @@ const BillerStatement = (props) => {
   }, [from, to]);
   return (
     <div>
-        <NavBar accountNumber={props.accountNumber} />
+      <NavBar accountNumber={props.accountNumber} />
       <br></br>
       <center>
         <h1>Biller Statement</h1>
       </center>
       <br></br>
-      {/* <p>
-        {from} and {to}
-      </p> */}
+
       <div style={{ paddingBottom: "20px" }}>
         <label>From</label>
         <input

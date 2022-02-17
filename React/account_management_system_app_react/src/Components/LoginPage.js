@@ -17,11 +17,12 @@ function LoginPage(props) {
       const sendEmailAndPassUrl = "http://localhost:8080/auth/login";
       console.log(values);
       axios.post(sendEmailAndPassUrl, values).then((response) => {
+        console.log(response);
         if (response.data.authenticated) {
           console.log("from login page ", response.data.accountNumber);
           props.setAccountNumber(response.data.accountNumber);
           props.setToken("Bearer " + response.data.token);
-          navigate("/account");
+          navigate("/deposit");
         } else {
           alert("Invalid UserName and Password");
           window.location.reload();

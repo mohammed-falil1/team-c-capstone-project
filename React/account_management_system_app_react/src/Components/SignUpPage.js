@@ -1,12 +1,15 @@
 import { React, useEffect, useState } from "react";
 import SignUpForm from "./SignUpForm";
-import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const submitForm = () => {
     setIsSubmitted(true);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSubmitted) {
@@ -19,7 +22,9 @@ function SignUpPage() {
         <SignUpForm submitForm={submitForm} />
       ) : (
         <>
-          <h1>Success. You will receive a mail.</h1>
+          {/* <h1>Success. You will receive a mail.</h1> */}
+          {alert("User Registered Successfully")}
+          {navigate("/")}
         </>
       )}
     </div>

@@ -6,6 +6,7 @@ function AfterLogin(props) {
   return (
     <>
       <NavBar accountNumber={props.accountNumber} />
+      
     </>
   );
 }

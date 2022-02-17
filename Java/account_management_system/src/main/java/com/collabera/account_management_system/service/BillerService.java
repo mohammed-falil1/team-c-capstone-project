@@ -11,7 +11,7 @@ import com.collabera.account_management_system.Vo.BillerPayment;
 import com.collabera.account_management_system.Vo.DepositOrWithdraw;
 import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.BillerRegister;
-import com.collabera.account_management_system.entity.SericeProviders;
+import com.collabera.account_management_system.entity.ServiceProviders;
 import com.collabera.account_management_system.entity.BillerStatement;
 import com.collabera.account_management_system.repo.AccountNumberRepo;
 import com.collabera.account_management_system.repo.BillerRegisterRepo;
@@ -79,7 +79,7 @@ public class BillerService {
 
 	}
 
-	public List<SericeProviders> getAllBillers() {
+	public List<ServiceProviders> getAllBillers() {
 
 		return serviceProviderRepo.findAll();
 	}

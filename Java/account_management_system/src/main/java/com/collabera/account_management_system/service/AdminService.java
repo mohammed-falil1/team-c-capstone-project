@@ -14,12 +14,14 @@ import com.collabera.account_management_system.entity.AccountApproval;
 import com.collabera.account_management_system.entity.AccountNumber;
 import com.collabera.account_management_system.entity.AdminLoginEntity;
 import com.collabera.account_management_system.entity.ApplicationId;
+import com.collabera.account_management_system.entity.LoginUser;
 import com.collabera.account_management_system.entity.TransactionTable;
 import com.collabera.account_management_system.entity.User;
 import com.collabera.account_management_system.repo.AccountNumberRepo;
 import com.collabera.account_management_system.repo.AccountRepo;
 import com.collabera.account_management_system.repo.AdminLoginRepo;
 import com.collabera.account_management_system.repo.AdminRepo;
+import com.collabera.account_management_system.repo.LoginAuthenticationRepo;
 import com.collabera.account_management_system.repo.TransactionRepo;
 import com.collabera.account_management_system.repo.UserRepo;
 import com.collabera.account_management_system.utility.ApplicationConstants;
@@ -65,6 +67,9 @@ public class AdminService {
 	
 	@Autowired
 	AdminLoginRepo adminLoginRepo;
+	
+	@Autowired
+	LoginAuthenticationRepo loginAuthenticationRepo;
 
 	public List<AccountApproval> getApprovals(String from, String to) {
 
@@ -79,17 +84,22 @@ public class AdminService {
 		Account account = new Account();
 
 		if (user != null) {
-			System.out.print("inside if cases and userId = " + userId);
 			accountApprovalService.updateStatus(userId,ApplicationConstants.ADMIN_APPROVAL_ACCEPTED);
 			userRepo.save(user);
-			System.out.println("User initial Balace "+user.getInitialBalance());
 			depositOrWithdraw.setAmount(user.getInitialBalance());
 			System.out.println("user initial balance ");
 			depositOrWithdraw.setRemarks("Initial");
 			depositOrWithdraw.setType(ApplicationConstants.CREDIT);
 			account = accountService.addItToAccountTable(user);
 			transactionsService.addItToTransactionTable(account,depositOrWithdraw);
-
+			
+			LoginUser loginUser = new LoginUser();
+			loginUser.setUserName(user.getEmail());
+			loginUser.setPassword(String.valueOf(user.getMobileNumber()));
+			loginUser.setAccountNumber(account.getAccountNumber());
+			loginAuthenticationRepo.save(loginUser);
+			
+			
 			// send email to the user on account opening
 //			sendEmailAfterAccountApproval(user);
 			return true;

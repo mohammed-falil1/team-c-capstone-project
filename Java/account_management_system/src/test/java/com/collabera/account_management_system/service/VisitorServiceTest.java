@@ -34,8 +34,10 @@ public class VisitorServiceTest {
 		accountApproval.setStatus(ApplicationConstants.ADMIN_APPROVAL_REQUESTED);
 		accountApproval.setTimestamp(Generators.getTimeStamp());
 		accountApproval.setUserId(user.getUserId());
-		user.setAccountApproval(accountApproval);		
+		user.setAccountApproval(accountApproval);
+		
 		when(userRepo.save(user)).thenReturn(user);
+		
 		String response="Success. You will receive a mail.";
 		assertEquals(response, visitorService.createAccount(user));
 	}

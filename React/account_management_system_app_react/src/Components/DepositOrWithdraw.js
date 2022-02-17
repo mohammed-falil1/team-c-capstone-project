@@ -26,27 +26,6 @@ function Deposit(props) {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   };
 
-  // const handleChangeAccount = (event) => {
-  //   setValues((values) => ({
-  //     ...values,
-  //     account: event.target.value,
-  //   }));
-  // };
-
-  // const handleChangeAmount = (event) => {
-  //   setValues((values) => ({
-  //     ...values,
-  //     amount: event.target.value,
-  //   }));
-  // };
-
-  // const handleChangeRemarks = (event) => {
-  //   setValues((values) => ({
-  //     ...values,
-  //     remarks: event.target.value,
-  //   }));
-  // };
-
   const handleSubmit = (event) => {
     alert("Deposit Successful");
     values.type = document.getElementById("mySelect").value;

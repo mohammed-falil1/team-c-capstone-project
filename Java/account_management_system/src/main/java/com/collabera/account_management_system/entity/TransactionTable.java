@@ -49,5 +49,5 @@ public class TransactionTable {
 	
 	@Column(name = "account_number")
 	private long accountNumber;
-
+	
 }

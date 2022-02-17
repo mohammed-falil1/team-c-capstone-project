@@ -7,12 +7,21 @@ function AccountStatements(props) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [statement, setStatement] = useState([]);
+  const [balance, setBalance] = useState();
   const headers = {
     "Content-Type": "application/json",
     Authorization: props.token,
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   };
+
+  useEffect(() => {
+    const getAccountBalanceUrl =
+      "http://localhost:8080/acc/get-balance/" + props.accountNumber;
+    axios.get(getAccountBalanceUrl, { headers: headers }).then((response) => {
+      setBalance(response.data);
+    });
+  }, []);
 
   useEffect(() => {
     if (from.length > 0 && to.length > 0) {
@@ -29,12 +38,14 @@ function AccountStatements(props) {
         <NavBar accountNumber={props.accountNumber} />
         <br></br>
         <center>
-          <h1>AccountStatements</h1>
+          <h1>Account Statements</h1>
         </center>
+
+        <div style={{ position: "relative" }}>
+          <h4>Account Number : {props.accountNumber}</h4>
+          <h4>Account Balance : {balance}</h4>
+        </div>
         <br></br>
-        {/* <p>
-        {from} and {to}
-      </p> */}
         <div style={{ paddingBottom: "20px" }}>
           <label>From</label>
           <input

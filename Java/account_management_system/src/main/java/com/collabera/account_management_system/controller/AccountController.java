@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collabera.account_management_system.Vo.DepositOrWithdraw;
+import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.PayeeTable;
 import com.collabera.account_management_system.entity.TransactionTable;
 import com.collabera.account_management_system.service.AccountService;
@@ -66,6 +67,13 @@ public class AccountController {
 	public ResponseEntity<Boolean> transfer(@RequestBody TransferVO transferVO){
 		boolean response = accountService.transfer(transferVO);
 		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/get-balance/{acct-no}")
+	public ResponseEntity<Long> getBalance(@PathVariable("acct-no") long accountNumber){
+		Account account = accountService.getAccountInfo(accountNumber);
+		return ResponseEntity.ok(account.getBalance());
+		
 	}
 	
 	

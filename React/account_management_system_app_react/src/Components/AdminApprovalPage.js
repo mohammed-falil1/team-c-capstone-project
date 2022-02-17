@@ -20,7 +20,6 @@ function AdminApproval(props) {
   const [show, setShow] = useState(requested);
   return (
     <div>
-     
       <ul class="nav justify-content-center">
         <li class="nav-item">
           <button

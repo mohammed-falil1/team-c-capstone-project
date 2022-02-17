@@ -34,11 +34,14 @@ function Transfer(props) {
   useEffect(() => {
     if (submit === true) {
       axios.post(payUrl, values, { headers: headers }).then((response) => {
-        console.log(response);
         isSubmitted(false);
-        alert("Money Transferred Successfully");
-        document.getElementById("amount").value="";
-        document.getElementById("remarks").value=""
+        document.getElementById("amount").value = "";
+        document.getElementById("remarks").value = "";
+        if (response.data === true) {
+          alert("Money Transferred Sucessfully");
+        } else {
+          alert("Insufficient Balance");
+        }
       });
     }
   }, [submit]);
@@ -59,7 +62,7 @@ function Transfer(props) {
 
   return (
     <div>
-        <NavBar accountNumber={props.accountNumber} />
+      <NavBar accountNumber={props.accountNumber} />
       <div class="form-body ">
         <div class="row">
           <div class="form-holder">
@@ -67,24 +70,6 @@ function Transfer(props) {
               <div class="form-items">
                 <h3>Please enter the below details to transfer</h3>
                 <form class="requires-validation" onSubmit={handleSubmit}>
-                  {/* <div class="col-md-12">
-                    <label
-                      for="pan-card"
-                      style={{ padding: "9px 0px 0px 9px" }}
-                    >
-                      Enter the account number:
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="payeeAccount"
-                      pattern="[0-9]{6}"
-                      placeholder="Minimum 6 digits "
-                      required
-                      value={values.account}
-                      onChange={handleChange}
-                    />
-                  </div> */}
                   <div class="col-md-12 mt-3">
                     <label
                       for="pan-card"
@@ -114,6 +99,7 @@ function Transfer(props) {
                     <input
                       class="form-control"
                       name="amount"
+                      id="amount"
                       type="number"
                       min="0"
                       placeholder="Enter amount"
@@ -133,6 +119,7 @@ function Transfer(props) {
                     <input
                       class="form-control"
                       name="remarks"
+                      id="remarks"
                       type="text"
                       placeholder="Enter remarks"
                       required

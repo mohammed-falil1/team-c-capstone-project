@@ -8,3 +8,16 @@
   background-color: maroon;
 }
 
+.flex-container>div {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container > div {
+ text-align: center;
+
+}
+.flex-container > div>p {
+ font-size: 20px;
+ 
+ }

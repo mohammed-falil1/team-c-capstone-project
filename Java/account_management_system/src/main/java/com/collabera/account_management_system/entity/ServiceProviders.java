@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "service_providers")
-public class SericeProviders {
+public class ServiceProviders {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
