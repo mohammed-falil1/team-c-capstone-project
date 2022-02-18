@@ -7,14 +7,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.collabera.account_management_system.Vo.BillerPayment;
+import com.collabera.account_management_system.Vo.ChangePasswordVO;
 import com.collabera.account_management_system.Vo.DepositOrWithdraw;
 import com.collabera.account_management_system.Vo.TransferVO;
 import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.BillerStatement;
+import com.collabera.account_management_system.entity.LoginUser;
 import com.collabera.account_management_system.entity.PayeeTable;
 import com.collabera.account_management_system.entity.User;
 import com.collabera.account_management_system.repo.AccountNumberRepo;
 import com.collabera.account_management_system.repo.AccountRepo;
+import com.collabera.account_management_system.repo.LoginAuthenticationRepo;
 import com.collabera.account_management_system.repo.PayeeTableRepo;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 import com.collabera.account_management_system.utility.Generators;
@@ -33,6 +36,9 @@ public class AccountService {
 
 	@Autowired
 	PayeeTableRepo payeeTableRepo;
+	
+	@Autowired
+	LoginAuthenticationRepo loginAuthenticationRepo;
 
 //	@Autowired
 //	BillerStatementService billerStatementService;
@@ -124,5 +130,6 @@ public class AccountService {
 		return false;
 
 	}
+	
 
 }

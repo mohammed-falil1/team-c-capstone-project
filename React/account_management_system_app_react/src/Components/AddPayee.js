@@ -31,9 +31,12 @@ function AddPayee(props) {
     axios
       .post(addPayeeUrl, payeeTable, { headers: headers })
       .then((response) => {
-        console.log(response);
+        if (response.data === true) {
+          alert("Payee Added Successfully");
+        } else {
+          alert("Sorry Payee Account Not Found");
+        }
       });
-    alert("Payee addition Successful");
     document.getElementById("accountNumber").value = "";
     document.getElementById("shortName").value = "";
     event.preventDefault();
@@ -41,7 +44,7 @@ function AddPayee(props) {
 
   return (
     <div>
-        <NavBar accountNumber={props.accountNumber} />
+      <NavBar accountNumber={props.accountNumber} />
       <div class="form-body ">
         <div class="row">
           <div class="form-holder">

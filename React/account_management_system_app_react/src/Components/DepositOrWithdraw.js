@@ -11,6 +11,8 @@ function Deposit(props) {
     remarks: "",
   });
 
+  const [btnString, setBtnString] = useState("Credit");
+
   const [submit, isSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -24,6 +26,10 @@ function Deposit(props) {
     Authorization: props.token,
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  };
+
+  const handleChangeSelect = (e) => {
+    setBtnString(e.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -59,7 +65,7 @@ function Deposit(props) {
           <div class="form-holder">
             <div class="form-content">
               <div class="form-items">
-                <h3>Please enter the below details to deposit</h3>
+                <h3>Please enter the below details to deposit/withdraw</h3>
                 <form class="requires-validation" onSubmit={handleSubmit}>
                   <div class="col-md-12 mt-3">
                     <label
@@ -68,10 +74,7 @@ function Deposit(props) {
                     >
                       Select the Biller Registered Services :
                     </label>
-                    <select
-                      // value={this.state.selectValue}
-                      id="mySelect"
-                    >
+                    <select id="mySelect" onChange={handleChangeSelect}>
                       <option value="Credit">Credit</option>
                       <option value="Debit">Debit</option>
                     </select>
@@ -115,7 +118,7 @@ function Deposit(props) {
 
                   <div class="form-button mt-3">
                     <button id="submit" type="submit" class="btn btn-primary">
-                      Deposit
+                      {btnString}
                     </button>
                   </div>
                 </form>

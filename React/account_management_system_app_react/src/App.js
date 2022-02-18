@@ -95,7 +95,9 @@ function App() {
           <Route
             exact
             path="/change-password"
-            element={<ChangePassword token={token} />}
+            element={
+              <ChangePassword token={token} accountNumber={accountNumber} />
+            }
           />
         </Routes>
       </BrowserRouter>

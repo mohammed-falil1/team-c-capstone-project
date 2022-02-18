@@ -25,8 +25,7 @@ public class BillerService {
 
 	@Autowired
 	BillerRegisterRepo billerRegisterRepo;
-	
-	
+
 	@Autowired
 	AccountService accountService;
 
@@ -51,6 +50,7 @@ public class BillerService {
 		if (account.getBalance() - billerPayment.getAmount() > 1000) {
 			account.setBalance(account.getBalance() - billerPayment.getAmount());
 			accountService.saveItInAccountRepo(account);
+
 			BillerStatement billerStatement = new BillerStatement();
 			billerStatement.setAccountNumber(account.getAccountNumber());
 			billerStatement.setBillNumber(billerPayment.getBillNumber());
@@ -58,11 +58,13 @@ public class BillerService {
 			billerStatement.setAmount(billerPayment.getAmount());
 			billerStatement.setBillerService(billerPayment.getBillerService());
 			billerStatementRepo.save(billerStatement);
+
 			DepositOrWithdraw depositOrWithdraw = new DepositOrWithdraw();
 			depositOrWithdraw.setRemarks(billerPayment.getBillerService() + "Service");
 			depositOrWithdraw.setAmount(billerPayment.getAmount());
 			depositOrWithdraw.setType(ApplicationConstants.DEBIT);
 			transactionsService.addItToTransactionTable(account, depositOrWithdraw);
+
 			return ApplicationConstants.SUCCESS;
 		}
 

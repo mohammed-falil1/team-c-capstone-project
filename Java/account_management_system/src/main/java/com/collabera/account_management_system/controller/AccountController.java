@@ -18,9 +18,12 @@ import com.collabera.account_management_system.entity.Account;
 import com.collabera.account_management_system.entity.PayeeTable;
 import com.collabera.account_management_system.entity.TransactionTable;
 import com.collabera.account_management_system.service.AccountService;
+import com.collabera.account_management_system.service.AdminService;
 import com.collabera.account_management_system.service.TransactionsService;
 import com.collabera.account_management_system.utility.ApplicationConstants;
 import com.collabera.account_management_system.Vo.TransferVO;
+
+import com.collabera.account_management_system.Vo.ChangePasswordVO;
 
 
 @RestController
@@ -33,6 +36,10 @@ public class AccountController {
 	
 	@Autowired
 	AccountService accountService;
+	
+	@Autowired
+	AdminService adminService;
+	
 
 	@GetMapping("/stmts/{from}/{to}")
 	public ResponseEntity<List<TransactionTable>> getStatement(@PathVariable String from, @PathVariable String to) {
@@ -75,6 +82,8 @@ public class AccountController {
 		return ResponseEntity.ok(account.getBalance());
 		
 	}
+	
+	
 	
 	
 	

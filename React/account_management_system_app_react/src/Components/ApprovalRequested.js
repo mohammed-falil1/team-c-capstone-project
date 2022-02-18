@@ -84,7 +84,7 @@ function ApprovalRequested(props) {
                   class="btn btn-success"
                   onClick={() => handleSuccess(item.userId)}
                 >
-                  Success
+                  Accept
                 </button>
               </td>
               <td>

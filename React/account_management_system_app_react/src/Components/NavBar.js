@@ -83,16 +83,7 @@ const NavBar = (props) => {
                   Account Statements
                 </a>
               </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => {
-                    navigate("/change-password");
-                  }}
-                >
-                  Change Password
-                </a>
-              </li>
+
               <li className="nav-item">
                 <a
                   className="nav-link"

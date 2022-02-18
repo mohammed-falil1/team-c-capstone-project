@@ -9,6 +9,8 @@ import com.collabera.account_management_system.entity.LoginUser;
 public interface LoginAuthenticationRepo extends JpaRepository<LoginUser, Integer> {
 
 	LoginUser findLoginByUserName(String userName);
+
+	LoginUser findLoginByAccountNumber(long accountNumber);
 	
 
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
+import axios from "axios";
 
 function ChangePassword(props) {
   const initState = { oldPassword: "", newPassword: "", confirmPassword: "" };
@@ -20,7 +21,25 @@ function ChangePassword(props) {
   };
 
   useEffect(() => {
+    const sendChangePasswordUrl = "http://localhost:8080/acc/change-password";
     if (isSubmitted) {
+      let ChangePasswordData = {
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+        accountNumber: props.accountNumber,
+      };
+      axios
+        .post(sendChangePasswordUrl, ChangePasswordData, { headers: headers })
+        .then((response) => {
+          if (response.data === true) {
+            alert("Password Changed Successfully");
+          } else {
+            alert("Current Password is Wrong");
+          }
+        });
+      document.getElementById("oldPassword").value = "";
+      document.getElementById("newPassword").value = "";
+      document.getElementById("confirmPassword").value = "";
     }
   }, [isSubmitted]);
 
@@ -60,7 +79,7 @@ function ChangePassword(props) {
                         value={values.password}
                         onChange={handleChange}
                         placeholder="Password"
-                        id="password"
+                        id="oldPassword"
                         required
                       />
                     </div>
@@ -78,7 +97,7 @@ function ChangePassword(props) {
                         value={values.password}
                         onChange={handleChange}
                         placeholder="Password"
-                        id="password"
+                        id="newPassword"
                         required
                       />
                     </div>
@@ -96,7 +115,7 @@ function ChangePassword(props) {
                         value={values.password}
                         onChange={handleChange}
                         placeholder="Password"
-                        id="password"
+                        id="confirmPassword"
                         required
                       />
                     </div>

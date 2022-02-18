@@ -27,8 +27,7 @@ public class TransactionsService {
 		transactionTable.setTimestamp(Generators.getTimeStamp());
 		transactionTable.setTransactionType(depositOrWithdraw.getType());
 		transactionTable.setAmount(depositOrWithdraw.getAmount());
-		System.out.println("account Number " + account.getAccountNumber());
-		System.out.println("account balance " + account.getBalance());
+		
 		transactionRepo.save(transactionTable);
 
 	}
