@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../CSS/AdminApproval.css";
-import NavBar from "./NavBar";
+
 
 function ApprovalAccepted(props) {
   const getAcceptedUrl =

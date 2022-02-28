@@ -88,10 +88,10 @@ const NavBar = (props) => {
                 <a
                   className="nav-link"
                   onClick={() => {
-                    navigate("/acct-stmt");
+                    navigate("/change-password");
                   }}
                 >
-                  {}
+                  Change Password
                 </a>
               </li>
             </ul>

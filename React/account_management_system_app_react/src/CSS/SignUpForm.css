@@ -12,7 +12,8 @@ body {
 html,
 body {
   height: auto;
-  width: auto;
+  max-width: auto;
+  overflow-x: hidden;
 }
 
 .form-holder {

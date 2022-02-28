@@ -1,7 +1,5 @@
 import axios from "axios";
-import react from "react";
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import "../CSS/AddPayee.css";
 import NavBar from "./NavBar";
 

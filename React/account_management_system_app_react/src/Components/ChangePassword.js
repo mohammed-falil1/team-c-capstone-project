@@ -31,6 +31,7 @@ function ChangePassword(props) {
       axios
         .post(sendChangePasswordUrl, ChangePasswordData, { headers: headers })
         .then((response) => {
+          console.log(response);
           if (response.data === true) {
             alert("Password Changed Successfully");
           } else {

@@ -1,6 +1,5 @@
 import React from "react";
 import NavBar from "../Components/NavBar";
-import DepositOrWithdraw from "../Components/DepositOrWithdraw";
 
 function AfterLogin(props) {
   return (

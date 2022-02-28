@@ -22,29 +22,3 @@ describe("BillerPay Test", () => {
     expect(container.find("#submit").length).toEqual(1);
   });
 });
-
-///state test
-// it("should update state on click", () => {
-//     const changeSize = jest.fn();
-//     const wrapper = shallow(<BillerStatement />);
-//     const handleClick = jest.spyOn(React, "useState");
-//     handleClick.mockImplementation(size => [size, changeSize]);
-
-//     wrapper.find("#submit").simulate("click");
-//     expect(changeSize).toBeCalled();
-
-//   });
-
-// it("Test click event", () => {
-//   const mockCallBack = jest.fn();
-//   const container = shallow(<BillerPay handleSubmit={mockCallBack} />);
-//   container.find("#submit").simulate("click");
-//   expect(mockCallBack.mock.calls.length).toEqual(1);
-//   expect(mockCallBack).toHaveBeenCalled();
-// });
-
-///axios
-// it("test axios get",()=>{
-//   axios.get.mockImplementation(() => Promise.resolve({ data: {...} }));
-
-// })
