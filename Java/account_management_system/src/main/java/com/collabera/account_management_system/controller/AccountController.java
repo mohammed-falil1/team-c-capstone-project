@@ -25,7 +25,6 @@ import com.collabera.account_management_system.Vo.TransferVO;
 
 import com.collabera.account_management_system.Vo.ChangePasswordVO;
 
-
 @RestController
 @RequestMapping("/acc")
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -33,59 +32,58 @@ public class AccountController {
 
 	@Autowired
 	TransactionsService transactionService;
-	
+
 	@Autowired
 	AccountService accountService;
-	
+
 	@Autowired
 	AdminService adminService;
-	
 
 	@GetMapping("/stmts/{from}/{to}")
 	public ResponseEntity<List<TransactionTable>> getStatement(@PathVariable String from, @PathVariable String to) {
 
-		List<TransactionTable> response = transactionService.getTransactions(ApplicationConstants.ACCOUNT_NUMBER , from, to);
+		List<TransactionTable> response = transactionService.getTransactions(ApplicationConstants.ACCOUNT_NUMBER, from,
+				to);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
-	
-	
+
 	@PostMapping("/depost-or-withdraw")
 	public ResponseEntity<String> depositOrWithdrawAmount(@RequestBody DepositOrWithdraw depositOrWithdraw) {
 		String response = accountService.depositOrWithdrawService(depositOrWithdraw);
 		return ResponseEntity.ok(response);
 
-		
 	}
-	
+
 	@PostMapping("/add-payee")
-	public ResponseEntity<Boolean>addPayee(@RequestBody PayeeTable payeeTable){
-		boolean response=accountService.addPayee(payeeTable);
+	public ResponseEntity<Boolean> addPayee(@RequestBody PayeeTable payeeTable) {
+		boolean response = accountService.addPayee(payeeTable);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping("/get-payees")
-	public ResponseEntity<List<PayeeTable>> getPayeeList(){
-		List<PayeeTable> payeeList=accountService.getPayeeList(ApplicationConstants.ACCOUNT_NUMBER);
+	public ResponseEntity<List<PayeeTable>> getPayeeList() {
+		List<PayeeTable> payeeList = accountService.getPayeeList(ApplicationConstants.ACCOUNT_NUMBER);
 		return ResponseEntity.ok(payeeList);
 	}
-	
+
 	@PostMapping("/transfer")
-	public ResponseEntity<Boolean> transfer(@RequestBody TransferVO transferVO){
+	public ResponseEntity<Boolean> transfer(@RequestBody TransferVO transferVO) {
 		boolean response = accountService.transfer(transferVO);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping("/get-balance/{acct-no}")
-	public ResponseEntity<Long> getBalance(@PathVariable("acct-no") long accountNumber){
+	public ResponseEntity<Long> getBalance(@PathVariable("acct-no") long accountNumber) {
 		Account account = accountService.getAccountInfo(accountNumber);
 		return ResponseEntity.ok(account.getBalance());
-		
+
 	}
-	
-	
-	
-	
-	
+
+	@PostMapping("/change-password")
+	public ResponseEntity<Boolean> changePassword(@RequestBody ChangePasswordVO changePasswordVO) {
+		boolean response = accountService.changePassword(changePasswordVO);
+		return ResponseEntity.ok(response);
+	}
 
 }

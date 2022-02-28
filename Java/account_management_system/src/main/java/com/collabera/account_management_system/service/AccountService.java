@@ -40,8 +40,7 @@ public class AccountService {
 	@Autowired
 	LoginAuthenticationRepo loginAuthenticationRepo;
 
-//	@Autowired
-//	BillerStatementService billerStatementService;
+
 
 	public Account addItToAccountTable(User user) {
 		Account account = new Account();
@@ -130,6 +129,17 @@ public class AccountService {
 		return false;
 
 	}
+
+	public boolean changePassword(ChangePasswordVO changePasswordVO) {
+		LoginUser loginUser = loginAuthenticationRepo.findLoginByAccountNumber(changePasswordVO.getAccountNumber());
+		if(loginUser!=null && loginUser.getPassword().equals(changePasswordVO.getOldPassword())){
+		loginUser.setPassword(changePasswordVO.getNewPassword());
+		loginAuthenticationRepo.save(loginUser);
+		return true;
+		}
+		return false;
+	}
+	
 	
 
 }
